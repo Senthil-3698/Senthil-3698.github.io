@@ -17,19 +17,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Updated Font to Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ======== UPDATED STYLES FOR DARK MODE ======== -->
     <style>
         :root {
-            --bg-primary: #f8fafc; /* slate-50 */
-            --bg-secondary: #ffffff; /* white */
-            --text-primary: #1e293b; /* slate-800 */
-            --text-secondary: #64748b; /* slate-500 */
-            --accent: #4338ca; /* indigo-700 */
-            --accent-light: #e0e7ff; /* indigo-100 */
+            --bg-primary: #0f172a; /* slate-900 */
+            --bg-secondary: #1e293b; /* slate-800 */
+            --text-primary: #e2e8f0; /* slate-100 */
+            --text-secondary: #94a3b8; /* slate-400 */
+            --accent: #818cf8; /* indigo-400 */
+            --accent-light: #312e81; /* indigo-900 */
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-primary);
             overflow-x: hidden;
@@ -49,7 +52,8 @@
 
         .card-lift:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            /* Updated shadow for dark mode */
+            box-shadow: 0 10px 15px -3px rgb(129 140 248 / 0.15), 0 4px 6px -4px rgb(129 140 248 / 0.15);
         }
         
         .timeline-item::before {
@@ -65,7 +69,40 @@
             border: 3px solid var(--accent);
             z-index: 1;
         }
+
+        /* Adjust profile pic blur for dark mode */
+        .group .blur-2xl {
+             filter: blur(40px); /* More intense blur */
+             opacity: 0.4;
+        }
+        .group:hover .blur-2xl {
+            opacity: 0.6;
+        }
+        
+        /* Modal dark mode */
+        #pdfModal {
+             background-color: rgb(0 0 0 / 0.7); /* Darker backdrop */
+        }
+        #pdfModal > div {
+             border: 1px solid #334155; /* slate-700 */
+        }
+        #modalTitle {
+            color: var(--text-primary);
+        }
+        #closeModalBtn {
+            color: var(--text-secondary);
+        }
+        #closeModalBtn:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Mobile menu dark mode */
+        #mobile-menu {
+            background-color: var(--bg-secondary);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
     </style>
+    <!-- ======== END OF UPDATED STYLES ======== -->
 </head>
 <body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
 
@@ -86,7 +123,8 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-white shadow-lg">
+        <!-- Removed bg-white from mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 shadow-lg">
             <a href="#about" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">About</a>
             <a href="#projects" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">Projects</a>
             <a href="#skills" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">Skills</a>
@@ -109,14 +147,13 @@
                     I'm a detail-oriented Computer Science student, committed to leveraging my technical skills and innovative thinking to contribute to impactful projects.
                 </p>
                 <div class="mt-10 flex justify-center md:justify-start space-x-4">
-                    <a href="#contact" class="bg-[var(--accent)] text-white hover:bg-indigo-800 font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl">Get In Touch</a>
+                    <a href="#contact" class="bg-[var(--accent)] text-white hover:bg-indigo-500 font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl">Get In Touch</a>
                 </div>
             </div>
             <div class="md:w-2/5 flex justify-center">
                 <div class="w-64 h-64 md:w-80 md:h-80 relative group">
-                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 rounded-full blur-2xl opacity-60 transition-all duration-500 group-hover:opacity-80 group-hover:blur-3xl"></div>
-                    <!-- **** This is the line I changed **** -->
-                    <img src="profile.png" alt="Senthil Kumaran Balakrishnan" class="rounded-full shadow-2xl mx-auto border-4 border-white relative z-10 transition-transform duration-300 group-hover:scale-105 object-cover w-full h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-full blur-2xl opacity-60 transition-all duration-500 group-hover:opacity-80 group-hover:blur-3xl"></div>
+                    <img src="profile.png" alt="Senthil Kumaran Balakrishnan" class="rounded-full shadow-2xl mx-auto border-4 border-white/10 relative z-10 transition-transform duration-300 group-hover:scale-105 object-cover w-full h-full">
                 </div>
             </div>
         </section>
@@ -137,14 +174,14 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-[var(--text-primary)]">My Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-[var(--bg-secondary)] rounded-2xl overflow-hidden shadow-lg card-lift group transition-all duration-300">
-                    <img src="https://placehold.co/600x400/e0e7ff/4338ca?text=Project+1" alt="Restaurant Website" class="w-full h-56 object-cover">
+                    <img src="https://placehold.co/600x400/1e293b/818cf8?text=Project+1" alt="Restaurant Website" class="w-full h-56 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">Restaurant Website Prototype</h3>
                         <p class="text-[var(--text-secondary)] mb-4">Developed a static prototype of a restaurant website using HTML, CSS, and JavaScript. The site features a visually appealing homepage, interactive food menu, image gallery, and contact form with a focus on clean design and responsive layout.</p>
                     </div>
                 </div>
                 <div class="bg-[var(--bg-secondary)] rounded-2xl overflow-hidden shadow-lg card-lift group transition-all duration-300">
-                    <img src="https://placehold.co/600x400/e0e7ff/4338ca?text=Project+2" alt="IoT Health Monitor" class="w-full h-56 object-cover">
+                    <img src="https://placehold.co/600x400/1e293b/818cf8?text=Project+2" alt="IoT Health Monitor" class="w-full h-56 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">IoT-Based Health Monitoring System</h3>
                         <p class="text-[var(--text-secondary)] mb-4">Designed and developed a real-time health monitoring system using Arduino, LM35, and Pulse Sensor. Data is transmitted via ESP8226 to ThingSpeak cloud, enabling continuous tracking of heart rate and body temperature.</p>
@@ -158,6 +195,7 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-[var(--text-primary)]">Technical Skills</h2>
             <div class="bg-[var(--bg-secondary)] rounded-2xl p-8 lg:p-12 shadow-lg">
                 <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-12">
+                    <!-- Icons are SVGs and will look fine on dark mode, but the text needs to be var(--text-secondary) -->
                     <a href="https://devdocs.io/c/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt="C" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">C</p></a>
                     <a href="https://isocpp.org/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">C++</p></a>
                     <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">Python</p></a>
@@ -166,10 +204,10 @@
                     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">JavaScript</p></a>
                     <a href="https://www.java.com/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">Java</p></a>
                     <a href="https://www.terraform.io/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">Terraform</p></a>
-                    <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">AWS</p></a>
+                    <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 mx-auto object-contain invert"><p class="mt-4 text-sm text-[var(--text-secondary)]">AWS</p></a>
                     <a href="https://angular.io/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" alt="Angular" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">Angular</p></a>
                     <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">React</p></a>
-                    <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" alt="SQL" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">SQL</p></a>
+                    <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" alt="SQL" class="h-16 w-16 mx-auto object-contain invert"><p class="mt-4 text-sm text-[var(--text-secondary)]">SQL</p></a>
                 </div>
             </div>
         </section>
@@ -177,7 +215,8 @@
         <!-- Experience Section -->
         <section id="experience" class="py-24 section">
             <h2 class="text-3xl font-bold text-center mb-16 text-[var(--text-primary)]">Experience</h2>
-            <div class="max-w-3xl mx-auto relative border-l-2 border-indigo-200 pl-8">
+            <!-- Updated timeline border color -->
+            <div class="max-w-3xl mx-auto relative border-l-2 border-slate-700 pl-8">
                 <div class="mb-12 relative timeline-item">
                     <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
                         <div class="flex items-start gap-4">
@@ -186,7 +225,7 @@
                                 <h3 class="text-xl font-bold text-[var(--text-primary)]">Management Team</h3>
                                 <p class="text-[var(--accent)] mb-2 font-semibold">Smile Over Stress (SOS-VIT) | Jan 2023 - Present</p>
                                 <p class="text-[var(--text-secondary)] mb-4">Contribute to planning, coordination, and execution of mental wellness programs, and lead awareness campaigns to foster a supportive campus environment.</p>
-                                <a href="https://www.instagram.com/sos_vit?utm_source=ig_web_button_share_sheet&igsh=MWlsZGFmN2JraHZrZw==" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300 inline-block">View Instagram Page</a>
+                                <a href="https://www.instagram.com/sos_vit?utm_source=ig_web_button_share_sheet&igsh=MWlsZGFmN2JraHZrZw==" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-700 hover:text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-300 inline-block">View Instagram Page</a>
                             </div>
                         </div>
                     </div>
@@ -200,8 +239,8 @@
                                 <p class="text-[var(--accent)] mb-2 font-semibold">Sandhata Technologies (Client: <strong>NatWest Group</strong>) | May 2025 - July 2025</p>
                                 <p class="text-[var(--text-secondary)] mb-4">Specialized in IAM and Security, managing Infrastructure as Code (IaaS) using Terraform in AWS.</p>
                                 <div class="flex flex-wrap gap-2">
-                                    <button class="view-pdf-button text-sm text-white bg-[var(--accent)] hover:bg-indigo-800 font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/1-hCj4uU3aK6aILlSdAiTpq3Wkj5XW7z7/preview" data-title="NatWest Internship Report">View Report</button>
-                                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1XudqCuR2uXlQFNw2JkSn_6lmJvxpuJIz/preview" data-title="NatWest Completion Certificate">View Certificate</button>
+                                    <button class="view-pdf-button text-sm text-white bg-[var(--accent)] hover:bg-indigo-500 font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/1-hCj4uU3aK6aILlSdAiTpq3Wkj5XW7z7/preview" data-title="NatWest Internship Report">View Report</button>
+                                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-700 hover:text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1XudqCuR2uXlQFNw2JkSn_6lmJvxpuJIz/preview" data-title="NatWest Completion Certificate">View Certificate</button>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +254,7 @@
                                 <h3 class="text-xl font-bold text-[var(--text-primary)]">Marketing Analyst</h3>
                                 <p class="text-[var(--accent)] mb-2 font-semibold">Time-Slotter Technologies Pvt Ltd | Jan 2024 - Aug 2024</p>
                                 <p class="text-[var(--text-secondary)] mb-4">Conducted market research to identify trends and customer preferences, contributing to targeted marketing strategies.</p>
-                                <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-title="Time-Slotter Completion Certificate">View Certificate</button>
+                                <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-700 hover:text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-title="Time-Slotter Completion Certificate">View Certificate</button>
                             </div>
                         </div>
                     </div>
@@ -236,30 +275,30 @@
                         </div>
                     </div>
                      <div class="flex flex-wrap gap-2 mt-4">
-                        <button class="view-pdf-button text-sm text-white bg-[var(--accent)] hover:bg-indigo-800 font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/14E06OG-a9v7dyaj1kKL2-B0tcz0YyLxf/preview" data-title="Oracle AI Foundations Certificate">View Certificate</button>
-                        <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1AGDDlQLnGkoOH1LDcPR7HF2M29ARsqCd/preview" data-title="Oracle AI Foundations Score Report">View Score Report</button>
-                        <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1nxUrFBRcCkf_Wi5yGtchaydqB7Aka96x/preview" data-title="Oracle AI Foundations Badge">View Badge</button>
+                        <button class="view-pdf-button text-sm text-white bg-[var(--accent)] hover:bg-indigo-500 font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/14E06OG-a9v7dyaj1kKL2-B0tcz0YyLxf/preview" data-title="Oracle AI Foundations Certificate">View Certificate</button>
+                        <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-700 hover:text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1AGDDlQLnGkoOH1LDcPR7HF2M29ARsqCd/preview" data-title="Oracle AI Foundations Score Report">View Score Report</button>
+                        <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-700 hover:text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="httpsci://drive.google.com/file/d/1nxUrFBRcCkf_Wi5yGtchaydqB7Aka96x/preview" data-title="Oracle AI Foundations Badge">View Badge</button>
                     </div>
                 </div>
                 <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
                     <div class="flex items-center gap-4 w-full">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 object-contain bg-white rounded-md p-1 invert">
                         <div class="flex-grow">
                             <h3 class="text-lg font-bold text-[var(--text-primary)]">AWS Certified Solutions Architect - Associate</h3>
                             <p class="text-[var(--accent)] text-sm font-semibold">Issued: Sep 2025</p>
                         </div>
                     </div>
-                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300 mt-4" data-pdf-url="httpsDos://drive.google.com/file/d/1x0a-WmS2tjimR_3_3vq_u5buQ0ShO3TK/preview" data-title="AWS SAA Certificate">View Certificate</button>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-700 hover:text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-300 mt-4" data-pdf-url="https://drive.google.com/file/d/1x0a-WmS2tjimR_3_3vq_u5buQ0ShO3TK/preview" data-title="AWS SAA Certificate">View Certificate</button>
                 </div>
                 <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
                     <div class="flex items-center gap-4 w-full">
-                        <img src="httpsT://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 object-contain bg-white rounded-md p-1 invert">
                         <div class="flex-grow">
                             <h3 class="text-lg font-bold text-[var(--text-primary)]">AWS Certified Cloud Practitioner</h3>
                             <p class="text-[var(--accent)] text-sm font-semibold">Issued: Aug 2024</p>
                         </div>
                     </div>
-                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300 mt-4" data-pdf-url="httpss://drive.google.com/file/d/1y67zALcu4lnZNV1BxdecwEmFAkKSfgK_/preview" data-title="AWS CCP Certificate">View Certificate</button>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-700 hover:text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-300 mt-4" data-pdf-url="https://drive.google.com/file/d/1y67zALcu4lnZNV1BxdecwEmFAkKSfgK_/preview" data-title="AWS CCP Certificate">View Certificate</button>
                 </div>
                 <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift md:col-span-2 flex items-center justify-between gap-4 transition-all duration-300">
                     <div class="flex items-center gap-4">
@@ -269,7 +308,7 @@
                             <p class="text-[var(--accent)] text-sm font-semibold">Issued: Sep 2024</p>
                         </div>
                     </div>
-                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="httpss://drive.google.com/file/d/1IZMu5Y30zQ_Y-gzAweC6P7xICGfLdqvn/preview" data-title="IoT Certificate">View Certificate</button>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-700 hover:text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1IZMu5Y30zQ_Y-gzAweC6P7xICGfLdqvn/preview" data-title="IoT Certificate">View Certificate</button>
                 </div>
             </div>
         </section>
@@ -280,10 +319,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
                     <div class="flex items-center gap-4">
-                        <img src="httpss://i.pinimg.com/736x/b7/53/91/b75391e2f187c6c15344feca551963b9.jpg" onerror="this.onerror=null;this.src='httpss://placehold.co/100x100/ffffff/1e293b?text=VIT';" alt="VIT" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <img src="https://i.pinimg.com/736x/b7/53/91/b75391e2f187c6c15344feca551963b9.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=VIT';" alt="VIT" class="h-16 w-16 object-contain bg-white rounded-md p-1">
                         <div>
                             <h3 class="text-xl font-bold text-[var(--text-primary)]">
-                                <a href="httpss://vit.ac.in/schools/school-of-computer-science-and-engineering-for-ug-courses" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--accent)] transition-colors duration-300">
+                                <a href="httpsm://vit.ac.in/schools/school-of-computer-science-and-engineering-for-ug-courses" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--accent)] transition-colors duration-300">
                                     B.Tech Computer Science and Engineering
                                 </a>
                             </h3>
@@ -294,10 +333,10 @@
                 </div>
                 <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
                     <div class="flex items-center gap-4">
-                        <img src="https://www.sknspmcvv.org/assets/img/logo1.png" onerror="this.onerror=null;this.src='httpss://placehold.co/100x100/ffffff/1e293b?text=SKNS';" alt="SKNS PMC VVJC" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <img src="httpsimg src="https://www.sknspmcvv.org/assets/img/logo1.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=SKNS';" alt="SKNS PMC VVJC" class="h-16 w-16 object-contain bg-white rounded-md p-1">
                         <div>
                             <h3 class="text-xl font-bold text-[var(--text-primary)]">
-                                <a href="httpss://www.sknspmcvv.org/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--accent)] transition-colors duration-300">
+                                <a href="https://www.sknspmcvv.org/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--accent)] transition-colors duration-300">
                                     Higher Secondary Education
                                 </a>
                             </h3>
@@ -314,18 +353,18 @@
             <h2 class="text-2xl font-bold text-[var(--accent)] mb-4">What’s Next?</h2>
             <h3 class="text-4xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">Get In Touch</h3>
             <p class="text-[var(--text-secondary)] mb-12 max-w-xl mx-auto">I'm currently open to new opportunities and collaborations. Whether you have a question or just want to say hi, I’ll try my best to get back to you!</p>
-            <a href="mailto:senthilvit2004@gmail.com" class="bg-[var(--accent)] text-white hover:bg-indigo-800 font-bold py-4 px-8 rounded-lg transition-all duration-300 text-lg shadow-lg hover:shadow-2xl">Say Hello</a>
+            <a href="mailto:senthilvit2004@gmail.com" class="bg-[var(--accent)] text-white hover:bg-indigo-500 font-bold py-4 px-8 rounded-lg transition-all duration-300 text-lg shadow-lg hover:shadow-2xl">Say Hello</a>
         </section>
     </main>
 
     <!-- PDF Viewer Modal -->
     <div id="pdfModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
         <div class="bg-[var(--bg-secondary)] rounded-lg shadow-2xl w-11/12 h-5/6 max-w-4xl flex flex-col">
-            <div class="flex justify-between items-center p-4 border-b">
+            <div class="flex justify-between items-center p-4 border-b border-slate-700">
                 <h3 id="modalTitle" class="text-lg font-bold text-[var(--text-primary)]">Document Viewer</h3>
                 <button id="closeModalBtn" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-Erics            </div>
-            <div class="flex-grow p-1 md:p-2 bg-gray-100">
+            </div>
+            <div class="flex-grow p-1 md:p-2 bg-slate-900">
                 <iframe id="pdfViewer" src="" class="w-full h-full" frameborder="0"></iframe>
             </div>
         </div>
