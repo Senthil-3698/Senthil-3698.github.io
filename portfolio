@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senthil Kumaran Balakrishnan - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #f8fafc; /* slate-50 */
+            --bg-secondary: #ffffff; /* white */
+            --text-primary: #1e293b; /* slate-800 */
+            --text-secondary: #64748b; /* slate-500 */
+            --accent: #4338ca; /* indigo-700 */
+            --accent-light: #e0e7ff; /* indigo-100 */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition-delay: 0.1s;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 1.25rem;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--bg-secondary);
+            border: 3px solid var(--accent);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
+
+    <!-- Header & Navigation -->
+    <header class="bg-[var(--bg-primary)]/80 backdrop-blur-md sticky top-0 z-50 transition-shadow duration-300 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-[var(--accent)] transition-colors">SKB</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300">About</a>
+                <a href="#projects" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300">Projects</a>
+                <a href="#skills" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300">Skills</a>
+                <a href="#experience" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300">Experience</a>
+                <a href="#certifications" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300">Certifications</a>
+                <a href="#education" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300">Education</a>
+                <a href="#contact" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-[var(--text-secondary)] hover:text-[var(--accent)] focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-white shadow-lg">
+            <a href="#about" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">About</a>
+            <a href="#projects" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">Projects</a>
+            <a href="#skills" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">Skills</a>
+            <a href="#experience" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">Experience</a>
+            <a href="#certifications" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">Certifications</a>
+            <a href="#education" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">Education</a>
+            <a href="#contact" class="block text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 py-2">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 relative z-10">
+
+        <!-- Hero Section -->
+        <section id="home" class="flex flex-col md:flex-row items-center justify-between min-h-[80vh] section">
+            <div class="md:w-3/5 mb-10 md:mb-0 text-center md:text-left">
+                <p class="text-lg text-[var(--accent)] mb-4 font-semibold">Hi, my name is</p>
+                <h1 class="text-4xl md:text-7xl font-bold mb-4 text-[var(--text-primary)]">Senthil Kumaran Balakrishnan.</h1>
+                <h2 class="text-3xl md:text-5xl font-bold text-[var(--text-secondary)] mb-6">I build things for the web.</h2>
+                <p class="text-[var(--text-secondary)] max-w-xl mx-auto md:mx-0 text-lg">
+                    I'm a detail-oriented Computer Science student, committed to leveraging my technical skills and innovative thinking to contribute to impactful projects.
+                </p>
+                <div class="mt-10 flex justify-center md:justify-start space-x-4">
+                    <a href="#contact" class="bg-[var(--accent)] text-white hover:bg-indigo-800 font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl">Get In Touch</a>
+                </div>
+            </div>
+            <div class="md:w-2/5 flex justify-center">
+                <div class="w-64 h-64 md:w-80 md:h-80 relative group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 rounded-full blur-2xl opacity-60 transition-all duration-500 group-hover:opacity-80 group-hover:blur-3xl"></div>
+                    <img src="https://placehold.co/400x400/ffffff/4338ca?text=SKB" alt="Senthil Kumaran Balakrishnan" class="rounded-full shadow-2xl mx-auto border-4 border-white relative z-10 transition-transform duration-300 group-hover:scale-105">
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 section">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[var(--text-primary)]">About Me</h2>
+            <div class="bg-[var(--bg-secondary)] rounded-2xl p-8 lg:p-12 shadow-lg">
+                <div class="text-[var(--text-secondary)] text-lg">
+                    <p class="mb-4">Hello! I'm Senthil Kumaran Balakrishnan, a pre-final year Computer Science and Engineering student. I'm a dedicated and detail-oriented individual with a strong academic background, committed to leveraging technical skills and innovative thinking for impactful projects.</p>
+                    <p>I am enthusiastic and motivated with a passion for technology and a solid foundation in software development. I can adapt quickly to new technologies and enjoy fostering collaborative environments. Adept at problem-solving and equipped with excellent communication skills, I thrive in dynamic settings that challenge my abilities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 section">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[var(--text-primary)]">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-[var(--bg-secondary)] rounded-2xl overflow-hidden shadow-lg card-lift group transition-all duration-300">
+                    <img src="https://placehold.co/600x400/e0e7ff/4338ca?text=Project+1" alt="Restaurant Website" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">Restaurant Website Prototype</h3>
+                        <p class="text-[var(--text-secondary)] mb-4">Developed a static prototype of a restaurant website using HTML, CSS, and JavaScript. The site features a visually appealing homepage, interactive food menu, image gallery, and contact form with a focus on clean design and responsive layout.</p>
+                    </div>
+                </div>
+                <div class="bg-[var(--bg-secondary)] rounded-2xl overflow-hidden shadow-lg card-lift group transition-all duration-300">
+                    <img src="https://placehold.co/600x400/e0e7ff/4338ca?text=Project+2" alt="IoT Health Monitor" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">IoT-Based Health Monitoring System</h3>
+                        <p class="text-[var(--text-secondary)] mb-4">Designed and developed a real-time health monitoring system using Arduino, LM35, and Pulse Sensor. Data is transmitted via ESP8226 to ThingSpeak cloud, enabling continuous tracking of heart rate and body temperature.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 section">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[var(--text-primary)]">Technical Skills</h2>
+            <div class="bg-[var(--bg-secondary)] rounded-2xl p-8 lg:p-12 shadow-lg">
+                <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-12">
+                    <a href="https://devdocs.io/c/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt="C" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">C</p></a>
+                    <a href="https://isocpp.org/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">C++</p></a>
+                    <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">Python</p></a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">HTML5</p></a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">CSS3</p></a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">JavaScript</p></a>
+                    <a href="https://www.java.com/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">Java</p></a>
+                    <a href="https://www.terraform.io/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">Terraform</p></a>
+                    <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">AWS</p></a>
+                    <a href="https://angular.io/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" alt="Angular" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">Angular</p></a>
+                    <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">React</p></a>
+                    <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer" class="text-center group w-24 transition-transform duration-300 hover:-translate-y-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" alt="SQL" class="h-16 w-16 mx-auto object-contain"><p class="mt-4 text-sm text-[var(--text-secondary)]">SQL</p></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24 section">
+            <h2 class="text-3xl font-bold text-center mb-16 text-[var(--text-primary)]">Experience</h2>
+            <div class="max-w-3xl mx-auto relative border-l-2 border-indigo-200 pl-8">
+                <div class="mb-12 relative timeline-item">
+                    <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShD3KLdYEgy90o561wd1oJRvVriIgKwJ5gFQ&s" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=SOS';" alt="Smile Over Stress" class="h-12 w-12 rounded-lg object-contain bg-white p-1">
+                            <div>
+                                <h3 class="text-xl font-bold text-[var(--text-primary)]">Management Team</h3>
+                                <p class="text-[var(--accent)] mb-2 font-semibold">Smile Over Stress (SOS-VIT) | Jan 2023 - Present</p>
+                                <p class="text-[var(--text-secondary)] mb-4">Contribute to planning, coordination, and execution of mental wellness programs, and lead awareness campaigns to foster a supportive campus environment.</p>
+                                <a href="https://www.instagram.com/sos_vit?utm_source=ig_web_button_share_sheet&igsh=MWlsZGFmN2JraHZrZw==" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300 inline-block">View Instagram Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-12 relative timeline-item">
+                     <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <img src="https://logo.clearbit.com/natwest.com" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=NW';" alt="NatWest Group" class="h-12 w-12 rounded-lg object-contain bg-white p-1">
+                            <div>
+                                <h3 class="text-xl font-bold text-[var(--text-primary)]">Software Engineer Intern</h3>
+                                <p class="text-[var(--accent)] mb-2 font-semibold">Sandhata Technologies (Client: <strong>NatWest Group</strong>) | May 2025 - July 2025</p>
+                                <p class="text-[var(--text-secondary)] mb-4">Specialized in IAM and Security, managing Infrastructure as Code (IaaS) using Terraform in AWS.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="view-pdf-button text-sm text-white bg-[var(--accent)] hover:bg-indigo-800 font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/1-hCj4uU3aK6aILlSdAiTpq3Wkj5XW7z7/preview" data-title="NatWest Internship Report">View Report</button>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="httpsD'oh! It looks like the code I'm trying to replace is missing. Please paste the code again, and I'll be sure to get it right this time./preview" data-title="NatWest Completion Certificate">View Certificate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative timeline-item">
+                     <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                             <img src="https://images.crunchbase.com/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/zscgrr59x37apyzgdgij" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=TS';" alt="Time-Slotter" class="h-12 w-12 rounded-lg object-contain bg-white p-1">
+                            <div>
+                                <h3 class="text-xl font-bold text-[var(--text-primary)]">Marketing Analyst</h3>
+                                <p class="text-[var(--accent)] mb-2 font-semibold">Time-Slotter Technologies Pvt Ltd | Jan 2024 - Aug 2024</p>
+                                <p class="text-[var(--text-secondary)] mb-4">Conducted market research to identify trends and customer preferences, contributing to targeted marketing strategies.</p>
+                                <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="httpsD'oh! It looks like the code I'm trying to replace is missing. Please paste the code again, and I'll be sure to get it right this time./dummy.pdf" data-title="Time-Slotter Completion Certificate">View Certificate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-24 section">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[var(--text-primary)]">Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300 md:col-span-2">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" alt="Oracle" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <div class="flex-grow">
+                            <h3 class="text-lg font-bold text-[var(--text-primary)]">Oracle Cloud Infrastructure 2025 AI Foundations Associate</h3>
+                            <p class="text-[var(--accent)] text-sm font-semibold">Issued: Sep 2025</p>
+                        </div>
+                    </div>
+                     <div class="flex flex-wrap gap-2 mt-4">
+                        <button class="view-pdf-button text-sm text-white bg-[var(--accent)] hover:bg-indigo-800 font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/14E06OG-a9v7dyaj1kKL2-B0tcz0YyLxf/preview" data-title="Oracle AI Foundations Certificate">View Certificate</button>
+                        <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1AGDDlQLnGkoOH1LDcPR7HF2M29ARsqCd/preview" data-title="Oracle AI Foundations Score Report">View Score Report</button>
+                        <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1nxUrFBRcCkf_Wi5yGtchaydqB7Aka96x/preview" data-title="Oracle AI Foundations Badge">View Badge</button>
+                    </div>
+                </div>
+                <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
+                    <div class="flex items-center gap-4 w-full">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <div class="flex-grow">
+                            <h3 class="text-lg font-bold text-[var(--text-primary)]">AWS Certified Solutions Architect - Associate</h3>
+                            <p class="text-[var(--accent)] text-sm font-semibold">Issued: Sep 2025</p>
+                        </div>
+                    </div>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300 mt-4" data-pdf-url="httpsD'oh! It looks like the code I'm trying to replace is missing. Please paste the code again, and I'll be sure to get it right this time./preview" data-title="AWS SAA Certificate">View Certificate</button>
+                </div>
+                <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
+                    <div class="flex items-center gap-4 w-full">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <div class="flex-grow">
+                            <h3 class="text-lg font-bold text-[var(--text-primary)]">AWS Certified Cloud Practitioner</h3>
+                            <p class="text-[var(--accent)] text-sm font-semibold">Issued: Aug 2024</p>
+                        </div>
+                    </div>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300 mt-4" data-pdf-url="httpsD'oh! It looks like the code I'm trying to replace is missing. Please paste the code again, and I'll be sure to get it right this time./preview" data-title="AWS CCP Certificate">View Certificate</button>
+                </div>
+                <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift md:col-span-2 flex items-center justify-between gap-4 transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                         <svg class="h-16 w-16 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 017.424 0M5.136 12.006a8.25 8.25 0 0113.728 0M1.984 8.974a11.25 11.25 0 0119.032 0M12 4.5v.008" />
+                        </svg>
+                        <div>
+                            <h3 class="text-lg font-bold text-[var(--text-primary)]">Internet of Things in Electronics</h3>
+                            <p class="text-[var(--accent)] text-sm font-semibold">Issued: Sep 2024</p>
+                        </div>
+                    </div>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="httpsD'oh! It looks like the code I'm trying to replace is missing. Please paste the code again, and I'll be sure to get it right this time./dummy.pdf" data-title="IoT Certificate">View Certificate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-24 section">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[var(--text-primary)]">Education</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <img src="https://i.pinimg.com/736x/b7/53/91/b75391e2f187c6c15344feca551963b9.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=VIT';" alt="VIT" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <div>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)]">B.Tech Computer Science and Engineering</h3>
+                            <p class="text-[var(--accent)] mb-2 font-semibold">Vellore Institute of Technology, Vellore (VIT)</p>
+                            <p class="text-sm text-[var(--text-secondary)]">Sep 2022 - Present</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-lg card-lift transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <img src="https://www.sknspmcvv.org/assets/img/logo1.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=SKNS';" alt="SKNS PMC VVJC" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <div>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)]">Higher Secondary Education</h3>
+                            <p class="text-[var(--accent)] mb-2 font-semibold">SKNS PMC VVJC, Chennai</p>
+                            <p class="text-sm text-[var(--text-secondary)]">Apr 2020 - Apr 2022</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 text-center section">
+            <h2 class="text-2xl font-bold text-[var(--accent)] mb-4">What’s Next?</h2>
+            <h3 class="text-4xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">Get In Touch</h3>
+            <p class="text-[var(--text-secondary)] mb-12 max-w-xl mx-auto">I'm currently open to new opportunities and collaborations. Whether you have a question or just want to say hi, I’ll try my best to get back to you!</p>
+            <a href="mailto:senthilvit2004@gmail.com" class="bg-[var(--accent)] text-white hover:bg-indigo-800 font-bold py-4 px-8 rounded-lg transition-all duration-300 text-lg shadow-lg hover:shadow-2xl">Say Hello</a>
+        </section>
+    </main>
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdfModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-[var(--bg-secondary)] rounded-lg shadow-2xl w-11/12 h-5/6 max-w-4xl flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 id="modalTitle" class="text-lg font-bold text-[var(--text-primary)]">Document Viewer</h3>
+                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="flex-grow p-1 md:p-2 bg-gray-100">
+                <iframe id="pdfViewer" src="" class="w-full h-full" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-transparent py-6 text-center text-[var(--text-secondary)] text-sm">
+        <p>Designed & Built by Senthil Kumaran Balakrishnan</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        
+        // Scroll animations
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
+
+        // PDF Modal Logic
+        const pdfModal = document.getElementById('pdfModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const pdfViewer = document.getElementById('pdfViewer');
+        const modalTitle = document.getElementById('modalTitle');
+        const viewPdfButtons = document.querySelectorAll('.view-pdf-button');
+
+        viewPdfButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                pdfViewer.src = button.dataset.pdfUrl;
+                modalTitle.textContent = button.dataset.title;
+                pdfModal.classList.remove('hidden');
+            });
+        });
+        closeModalBtn.addEventListener('click', () => {
+            pdfModal.classList.add('hidden');
+            pdfViewer.src = '';
+        });
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !pdfModal.classList.contains('hidden')) {
+                closeModalBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>

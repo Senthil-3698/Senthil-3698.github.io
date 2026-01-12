@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senthil Kumaran Balakrishnan - Portfolio</title>
+
+    <!-- ======== NEW PREVIEW TAGS ADDED BELOW ======== -->
+    <meta property="og:title" content="Senthil Kumaran Balakrishnan - Portfolio">
+    <meta property="og:description" content="Computer Science student and web developer portfolio.">
+    <!-- This tag points directly to your profile picture on GitHub -->
+    <meta property="og:image" content="https://senthil-3698.github.io/profile.png">
+    <meta property="og:url" content="https://senthil-3698.github.io/portfolio.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- ======== END OF NEW PREVIEW TAGS ======== -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #020617;
+            --bg-secondary: rgba(15, 23, 42, 0.7);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent: #818cf8;
+            --accent-strong: #6366f1;
+            --accent-light: rgba(99, 102, 241, 0.15);
+            --card-border: rgba(148, 163, 184, 0.18);
+        }
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-primary);
+        }
+
+        *::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        *::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-strong);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at 20% 20%, rgba(129, 140, 248, 0.35), transparent 45%),
+                        radial-gradient(circle at 80% 0%, rgba(236, 72, 153, 0.25), transparent 50%),
+                        #020617;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::before {
+            background: radial-gradient(circle, rgba(15, 23, 42, 0.7) 0%, rgba(2, 6, 23, 1) 60%);
+            opacity: 0.8;
+        }
+
+        body::after {
+            backdrop-filter: blur(120px);
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.8), transparent);
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-100px) translateX(100px) scale(1.2);
+                opacity: 0.6;
+            }
+        }
+
+        .particle:nth-child(1) { width: 80px; height: 80px; left: 10%; top: 20%; animation-delay: 0s; animation-duration: 25s; }
+        .particle:nth-child(2) { width: 60px; height: 60px; left: 70%; top: 10%; animation-delay: 3s; animation-duration: 30s; }
+        .particle:nth-child(3) { width: 100px; height: 100px; left: 40%; top: 60%; animation-delay: 6s; animation-duration: 28s; }
+        .particle:nth-child(4) { width: 70px; height: 70px; left: 80%; top: 70%; animation-delay: 9s; animation-duration: 26s; }
+        .particle:nth-child(5) { width: 90px; height: 90px; left: 20%; top: 80%; animation-delay: 12s; animation-duration: 32s; }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+            z-index: 1000;
+            transform-origin: left;
+            transition: transform 0.1s ease-out;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            position: relative;
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition-delay: 0.1s;
+            scroll-margin-top: 100px;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(236, 72, 153, 0.08));
+            filter: blur(80px);
+            opacity: 0.6;
+            z-index: -2;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            box-shadow: 0 20px 80px rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(24px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card {
+            position: relative;
+            padding: 2.5rem;
+            border-radius: 28px;
+            background: linear-gradient(#0b1120, #0b1120) padding-box,
+                        linear-gradient(120deg, rgba(99, 102, 241, 0.8), rgba(236, 72, 153, 0.8)) border-box;
+            border: 2px solid transparent;
+            box-shadow: 0 30px 80px rgba(14, 18, 33, 0.8);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            z-index: -1;
+            border-radius: 40px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 60%);
+            opacity: 0.8;
+            filter: blur(30px);
+        }
+
+        .card-lift {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease, border-color 0.3s ease;
+        }
+
+        .card-lift:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(99, 102, 241, 0.4), 0 0 40px rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .section-heading {
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .section-title {
+            font-size: clamp(1.875rem, 3vw, 3rem);
+            font-weight: 700;
+            margin-top: 0.5rem;
+            color: #f8fafc;
+        }
+
+        .hero-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(129, 140, 248, 0.4);
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-avatar img {
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.35);
+        }
+
+        .hero-blob {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(from 140deg, rgba(99, 102, 241, 0.7), rgba(236, 72, 153, 0.4), rgba(14, 165, 233, 0.5));
+            filter: blur(30px);
+            opacity: 0.35;
+            animation: rotate 16s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .stat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid var(--card-border);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .skill-item:hover::before {
+            opacity: 1;
+        }
+
+        .skill-item img {
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 0 transparent);
+        }
+
+        .skill-item:hover img {
+            transform: scale(1.15) rotate(5deg);
+            filter: drop-shadow(0 8px 16px rgba(99, 102, 241, 0.5));
+        }
+
+        .skill-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .skill-item p {
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.4));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.2rem;
+            top: 1.5rem;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0f172a;
+            border: 3px solid var(--accent);
+            z-index: 2;
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.8);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1.8rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            box-shadow: 0 25px 40px rgba(99, 102, 241, 0.35);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 35px 60px rgba(99, 102, 241, 0.55), 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .cta-button svg {
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover svg {
+            transform: translateX(5px);
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chip {
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.7);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .contact-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 32px;
+            padding: 3rem;
+            box-shadow: 0 35px 90px rgba(15, 23, 42, 0.7);
+        }
+
+        .modal-content {
+            border-radius: 30px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        /* Typing Effect */
+        .typing-text::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Fade in from bottom animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Stagger animation delays */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Pulse animation for badges */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+
+        .pulse-slow {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Smooth reveal for nav */
+        header {
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Enhanced timeline dots */
+        .timeline-item::before {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Image zoom on hover */
+        .zoom-image {
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .zoom-image img {
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .zoom-image:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+    </style>
+</head>
+<body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
+
+    <!-- Animated Background Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Header & Navigation -->
+    <header class="bg-[#020617]/80 backdrop-blur-lg sticky top-0 z-50 transition-shadow duration-300 border-b border-white/10">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white tracking-wide">SKB</a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="text-[var(--text-secondary)] hover:text-white transition-colors duration-300">About</a>
+                <a href="#projects" class="text-[var(--text-secondary)] hover:text-white transition-colors duration-300">Projects</a>
+                <a href="#skills" class="text-[var(--text-secondary)] hover:text-white transition-colors duration-300">Skills</a>
+                <a href="#experience" class="text-[var(--text-secondary)] hover:text-white transition-colors duration-300">Experience</a>
+                <a href="#certifications" class="text-[var(--text-secondary)] hover:text-white transition-colors duration-300">Certifications</a>
+                <a href="#education" class="text-[var(--text-secondary)] hover:text-white transition-colors duration-300">Education</a>
+                <a href="#contact" class="text-[var(--text-secondary)] hover:text-white transition-colors duration-300">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-[var(--text-secondary)] hover:text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-[#0f172a] border-t border-white/10">
+            <a href="#about" class="block text-[var(--text-secondary)] hover:text-white transition-colors duration-300 py-2">About</a>
+            <a href="#projects" class="block text-[var(--text-secondary)] hover:text-white transition-colors duration-300 py-2">Projects</a>
+            <a href="#skills" class="block text-[var(--text-secondary)] hover:text-white transition-colors duration-300 py-2">Skills</a>
+            <a href="#experience" class="block text-[var(--text-secondary)] hover:text-white transition-colors duration-300 py-2">Experience</a>
+            <a href="#certifications" class="block text-[var(--text-secondary)] hover:text-white transition-colors duration-300 py-2">Certifications</a>
+            <a href="#education" class="block text-[var(--text-secondary)] hover:text-white transition-colors duration-300 py-2">Education</a>
+            <a href="#contact" class="block text-[var(--text-secondary)] hover:text-white transition-colors duration-300 py-2">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 relative z-10">
+
+        <!-- Hero Section -->
+        <section id="home" class="section py-24 min-h-[90vh] flex items-center">
+            <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center w-full">
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-3 fade-in-up stagger-1">
+                        <span class="hero-highlight pulse-slow">Hi, my name is</span>
+                        <span class="stat-pill">Computer Science Student</span>
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)] fade-in-up stagger-2">
+                        <span class="gradient-text">Senthil Kumaran Balakrishnan.</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-4xl font-semibold text-[var(--text-secondary)] typing-text fade-in-up stagger-3">
+                        I build things for the web.
+                    </h2>
+                    <p class="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto lg:mx-0 fade-in-up stagger-4">
+                        I'm a detail-oriented Computer Science student, committed to leveraging my technical skills and innovative thinking to contribute to impactful projects.
+                    </p>
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4 fade-in-up stagger-5">
+                        <a href="#contact" class="cta-button">
+                            <span>Get In Touch</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L21 10.5m0 0l-3.75 3.75M21 10.5H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative flex justify-center hero-avatar fade-in-up stagger-3">
+                    <div class="w-64 h-64 md:w-80 md:h-80 relative">
+                        <div class="hero-blob"></div>
+                        <img src="profile.png" alt="Senthil Kumaran Balakrishnan" class="rounded-full shadow-2xl mx-auto relative z-10 transition-transform duration-300 hover:scale-105 object-cover w-full h-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section py-24">
+            <div class="text-center mb-12">
+                <p class="section-heading">About</p>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="glass-card p-10 lg:p-14">
+                <div class="grid lg:grid-cols-2 gap-10 text-lg text-[var(--text-secondary)]">
+                    <p>Hello! I'm Senthil Kumaran Balakrishnan, a pre-final year Computer Science and Engineering student. I'm a dedicated and detail-oriented individual with a strong academic background, committed to leveraging technical skills and innovative thinking for impactful projects.</p>
+                    <p>I am enthusiastic and motivated with a passion for technology and a solid foundation in software development. I can adapt quickly to new technologies and enjoy fostering collaborative environments. Adept at problem-solving and equipped with excellent communication skills, I thrive in dynamic settings that challenge my abilities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section py-24">
+            <div class="text-center mb-12">
+                <p class="section-heading">Projects</p>
+                <h2 class="section-title">My Projects</h2>
+            </div>
+            <div class="feature-card mb-12 space-y-6">
+                <div class="flex flex-wrap items-center gap-3 text-sm uppercase tracking-[0.3em] text-[var(--accent)]">
+                    <span>Featured</span>
+                    <span class="w-10 h-px bg-[var(--accent)]/60"></span>
+                    <span>Final Year Project</span>
+                </div>
+                <div class="flex flex-col lg:flex-row gap-10 items-start">
+                    <div class="flex-1 space-y-6">
+                        <h3 class="text-3xl font-semibold text-white">Intelligent Liver Disease Prediction Suite</h3>
+                        <p class="text-[var(--text-secondary)] text-lg">End-to-end ML pipeline comparing algorithms (CatBoost, LightGBM, XGBoost, Random Forest, SVM, Logistic Regression, MLP) on curated liver disease datasets with automated evaluation dashboards and exportable model artifacts. The comprehensive project report captures methodology, experiments, and deployment notes.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="chip">Python</span>
+                            <span class="chip">MLflow</span>
+                            <span class="chip">LightGBM</span>
+                            <span class="chip">XGBoost</span>
+                            <span class="chip">Pandas</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-4 items-start">
+                        <a href="https://drive.google.com/drive/folders/1ptJduwU8iCWoEeaoTW1dq2YDXl7N_2U4?usp=drive_link" target="_blank" rel="noopener noreferrer" class="cta-button">
+                            View Project Folder
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L21 10.5m0 0l-3.75 3.75M21 10.5H3" />
+                            </svg>
+                        </a>
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                            <span class="chip bg-[var(--accent-light)] text-[var(--accent)] font-semibold">Report Included</span>
+                            <button class="view-pdf-button text-sm text-white bg-[var(--accent-strong)] hover:bg-indigo-700 font-semibold px-5 py-2.5 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/12gB4VBAbcjNoTlHa7c0vBDbTXWr86lx9/preview" data-title="Final Year Project Report">
+                                View Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="glass-card card-lift overflow-hidden group zoom-image">
+                    <div class="relative h-56">
+                        <img src="https://placehold.co/600x400/e0e7ff/4338ca?text=Project+1" alt="Restaurant Website" class="w-full h-full object-cover opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f172acc]"></div>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip">HTML</span>
+                            <span class="chip">CSS</span>
+                            <span class="chip">JavaScript</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-white">Restaurant Website Prototype</h3>
+                        <p class="text-[var(--text-secondary)]">Developed a static prototype of a restaurant website using HTML, CSS, and JavaScript. The site features a visually appealing homepage, interactive food menu, image gallery, and contact form with a focus on clean design and responsive layout.</p>
+                    </div>
+                </div>
+                <div class="glass-card card-lift overflow-hidden group zoom-image">
+                    <div class="relative h-56">
+                        <img src="https://placehold.co/600x400/e0e7ff/4338ca?text=Project+2" alt="IoT Health Monitor" class="w-full h-full object-cover opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f172acc]"></div>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip">Arduino</span>
+                            <span class="chip">IoT</span>
+                            <span class="chip">ThingSpeak</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-white">IoT-Based Health Monitoring System</h3>
+                        <p class="text-[var(--text-secondary)]">Designed and developed a real-time health monitoring system using Arduino, LM35, and Pulse Sensor. Data is transmitted via ESP8226 to ThingSpeak cloud, enabling continuous tracking of heart rate and body temperature.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report Section -->
+        <section id="report" class="section py-24">
+            <div class="text-center mb-12">
+                <p class="section-heading">Report</p>
+                <h2 class="section-title">Final Year Project Report</h2>
+            </div>
+            <div class="glass-card p-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+                <div class="text-[var(--text-secondary)] max-w-2xl">
+                    <p class="text-lg">Dive into the methodology, experimentation, and key findings of my Intelligent Liver Disease Prediction Suite. The report captures dataset design, model comparison strategy, performance analysis, and deployment considerations.</p>
+                </div>
+                <button class="view-pdf-button text-sm text-white bg-[var(--accent-strong)] hover:bg-indigo-700 font-semibold px-6 py-3 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/12gB4VBAbcjNoTlHa7c0vBDbTXWr86lx9/preview" data-title="Final Year Project Report">
+                    View Report
+                </button>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section py-24">
+            <div class="text-center mb-12">
+                <p class="section-heading">Skills</p>
+                <h2 class="section-title">Technical Skills</h2>
+            </div>
+            <div class="glass-card p-8 lg:p-12">
+                <div class="skills-grid text-center">
+                    <a href="https://devdocs.io/c/" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt="C" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">C</p>
+                    </a>
+                    <a href="https://isocpp.org/" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">C++</p>
+                    </a>
+                    <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">Python</p>
+                    </a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">HTML5</p>
+                    </a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">CSS3</p>
+                    </a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">JavaScript</p>
+                    </a>
+                    <a href="https://www.java.com/" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">Java</p>
+                    </a>
+                    <a href="https://www.terraform.io/" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">Terraform</p>
+                    </a>
+                    <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">AWS</p>
+                    </a>
+                    <a href="https://angular.io/" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" alt="Angular" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">Angular</p>
+                    </a>
+                    <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">React</p>
+                    </a>
+                    <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer" class="skill-item group">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" alt="SQL" class="h-16 w-16 mx-auto object-contain">
+                        <p class="mt-4 text-sm text-[var(--text-secondary)]">SQL</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section py-24">
+            <div class="text-center mb-16">
+                <p class="section-heading">Experience</p>
+                <h2 class="section-title">Experience</h2>
+            </div>
+            <div class="glass-card p-10 max-w-3xl mx-auto timeline">
+                <div class="mb-12 relative timeline-item">
+                    <div class="bg-[var(--bg-secondary)]/90 p-6 rounded-2xl card-lift transition-all duration-300 border border-[var(--card-border)]">
+                        <div class="flex items-start gap-4">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShD3KLdYEgy90o561wd1oJRvVriIgKwJ5gFQ&s" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=SOS';" alt="Smile Over Stress" class="h-12 w-12 rounded-lg object-contain bg-white p-1">
+                            <div>
+                                <h3 class="text-xl font-bold text-[var(--text-primary)]">Management Team</h3>
+                                <p class="text-[var(--accent)] mb-2 font-semibold">Smile Over Stress (SOS-VIT) | Jan 2023 - Present</p>
+                                <p class="text-[var(--text-secondary)] mb-4">Contribute to planning, coordination, and execution of mental wellness programs, and lead awareness campaigns to foster a supportive campus environment.</p>
+                                <a href="https://www.instagram.com/sos_vit?utm_source=ig_web_button_share_sheet&igsh=MWlsZGFmN2JraHZrZw==" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300 inline-block">View Instagram Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-12 relative timeline-item">
+                     <div class="bg-[var(--bg-secondary)]/90 p-6 rounded-2xl card-lift transition-all duration-300 border border-[var(--card-border)]">
+                        <div class="flex items-start gap-4">
+                            <img src="https://logo.clearbit.com/natwest.com" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=NW';" alt="NatWest Group" class="h-12 w-12 rounded-lg object-contain bg-white p-1">
+                            <div>
+                                <h3 class="text-xl font-bold text-[var(--text-primary)]">Software Engineer Intern</h3>
+                                <p class="text-[var(--accent)] mb-2 font-semibold">Sandhata Technologies (Client: <strong>NatWest Group</strong>) | May 2025 - July 2025</p>
+                                <p class="text-[var(--text-secondary)] mb-4">Specialized in IAM and Security, managing Infrastructure as Code (IaaS) using Terraform in AWS.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="view-pdf-button text-sm text-white bg-[var(--accent)] hover:bg-indigo-800 font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/1-hCj4uU3aK6aILlSdAiTpq3Wkj5XW7z7/preview" data-title="NatWest Internship Report">View Report</button>
+                                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1XudqCuR2uXlQFNw2JkSn_6lmJvxpuJIz/preview" data-title="NatWest Completion Certificate">View Certificate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative timeline-item">
+                     <div class="bg-[var(--bg-secondary)]/90 p-6 rounded-2xl card-lift transition-all duration-300 border border-[var(--card-border)]">
+                        <div class="flex items-start gap-4">
+                             <img src="https://media.licdn.com/dms/image/D560BAQG-kY-8-8c3ZQ/company-logo_200_200/0/1703138888492/timeslotter_logo?e=1768809600&v=beta&t=H-9z-h-o-0a-4_G-F-J-2-K-0H_L-A" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=TS';" alt="Time-Slotter" class="h-12 w-12 rounded-lg object-contain bg-white p-1">
+                            <div>
+                                <h3 class="text-xl font-bold text-[var(--text-primary)]">Marketing Analyst</h3>
+                                <p class="text-[var(--accent)] mb-2 font-semibold">Time-Slotter Technologies Pvt Ltd | Jan 2024 - Aug 2024</p>
+                                <p class="text-[var(--text-secondary)] mb-4">Conducted market research to identify trends and customer preferences, contributing to targeted marketing strategies.</p>
+                                <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-title="Time-Slotter Completion Certificate">View Certificate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="section py-24">
+            <div class="text-center mb-12">
+                <p class="section-heading">Certifications</p>
+                <h2 class="section-title">Certifications</h2>
+            </div>
+            <div class="cert-grid">
+                <div class="glass-card p-8 flex flex-col gap-6">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" alt="Oracle" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Oracle Cloud Infrastructure 2025 AI Foundations Associate</h3>
+                            <p class="text-[var(--accent)] text-sm font-semibold">Issued: Sep 2025</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="view-pdf-button text-sm text-white bg-[var(--accent-strong)] hover:bg-indigo-700 font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md" data-pdf-url="https://drive.google.com/file/d/14E06OG-a9v7dyaj1kKL2-B0tcz0YyLxf/preview" data-title="Oracle AI Foundations Certificate">View Certificate</button>
+                        <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1AGDDlQLnGkoOH1LDcPR7HF2M29ARsqCd/preview" data-Títle="Oracle AI Foundations Score Report">View Score Report</button>
+                        <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1nxUrFBRcCkf_Wi5yGtchaydqB7Aka96x/preview" data-title="Oracle AI Foundations Badge">View Badge</button>
+                    </div>
+                </div>
+                <div class="glass-card p-8 flex flex-col gap-6">
+                    <div class="flex items-center gap-5">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">AWS Certified Solutions Architect - Associate</h3>
+                            <p class="text-[var(--accent)] text-sm font-semibold">Issued: Sep 2025</p>
+                        </div>
+                    </div>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1x0a-WmS2tjimR_3_3vq_u5buQ0ShO3TK/preview" data-title="AWS SAA Certificate">View Certificate</button>
+                </div>
+                <div class="glass-card p-8 flex flex-col gap-6">
+                    <div class="flex items-center gap-5">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">AWS Certified Cloud Practitioner</h3>
+                            <p class="text-[var(--accent)] text-sm font-semibold">Issued: Aug 2024</p>
+                        </div>
+                    </div>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1y67zALcu4lnZNV1BxdecwEmFAkKSfgK_/preview" data-title="AWS CCP Certificate">View Certificate</button>
+                </div>
+                <div class="glass-card p-8 flex flex-col gap-6">
+                    <div class="flex items-center gap-5">
+                         <img src="https://i.pinimg.com/736x/b7/53/91/b75391e2f187c6c15344feca551963b9.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=VIT';" alt="VIT" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Internet of Things in Electronics</h3>
+                            <p class="text-[var(--accent)] text-sm font-semibold">Issued: Sep 2024</p>
+                        </div>
+                    </div>
+                    <button class="view-pdf-button text-sm text-[var(--accent)] bg-[var(--accent-light)] hover:bg-indigo-200 font-semibold px-4 py-2 rounded-lg transition-colors duration-300" data-pdf-url="https://drive.google.com/file/d/1IZMu5Y30zQ_Y-gzAweC6P7xICGfLdqvn/preview" data-title="IoT Certificate">View Certificate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section py-24">
+            <div class="text-center mb-12">
+                <p class="section-heading">Education</p>
+                <h2 class="section-title">Education</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 flex gap-5 items-start card-lift">
+                    <img src="https://i.pinimg.com/736x/b7/53/91/b75391e2f187c6c15344feca551963b9.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=VIT';" alt="VIT" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-white">
+                            <a href="httpsm://vit.ac.in/schools/school-of-computer-science-and-engineering-for-ug-courses" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--accent)] transition-colors duration-300">
+                                B.Tech Computer Science and Engineering
+                            </a>
+                        </h3>
+                        <p class="text-[var(--accent)] mb-1 font-semibold">Vellore Institute of Technology, Vellore (VIT)</p>
+                        <p class="text-sm text-[var(--text-secondary)]">Sep 2022 - Present</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8 flex gap-5 items-start card-lift">
+                    <img src="https://www.sknspmcvv.org/assets/img/logo1.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/1e293b?text=SKNS';" alt="SKNS PMC VVJC" class="h-16 w-16 object-contain bg-white rounded-md p-1">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-white">
+                            <a href="https://www.sknspmcvv.org/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--accent)] transition-colors duration-300">
+                                Higher Secondary Education
+                            </a>
+                        </h3>
+                        <p class="text-[var(--accent)] mb-1 font-semibold">SKNS PMC VVJC, Chennai</p>
+                        <p class="text-sm text-[var(--text-secondary)]">Apr 2020 - Apr 2022</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section py-24">
+            <div class="contact-card text-center space-y-6">
+                <p class="section-heading">What’s Next?</p>
+                <h3 class="text-4xl md:text-5xl font-bold text-white">Get In Touch</h3>
+                <p class="text-[var(--text-secondary)] max-w-xl mx-auto">I'm currently open to new opportunities and collaborations. Whether you have a question or just want to exchange ideas, my inbox is always open.</p>
+                <a href="mailto:senthilvit2004@gmail.com" class="cta-button mx-auto justify-center">Say Hello</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdfModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-[var(--bg-secondary)] rounded-lg shadow-2xl w-11/12 h-5/6 max-w-4xl flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 id="modalTitle" class="text-lg font-bold text-[var(--text-primary)]">Document Viewer</h3>
+                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="flex-grow p-1 md:p-2 bg-gray-100">
+                <iframe id="pdfViewer" src="" class="w-full h-full" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-transparent py-6 text-center text-[var(--text-secondary)] text-sm">
+        <p>Designed & Built by Senthil Kumaran Balakrishnan</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        
+        // Scroll Progress Bar
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollProgress.style.transform = `scaleX(${scrollPercentage / 100})`;
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('#home');
+            if (heroSection) {
+                heroSection.style.transform = `translateY(${scrolled * 0.3}px)`;
+                heroSection.style.opacity = 1 - (scrolled / 600);
+            }
+        });
+        
+        // Enhanced scroll animations with stagger effect
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate children with stagger effect
+                    const children = entry.target.querySelectorAll('.glass-card, .feature-card, .cert-grid > *');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '0';
+                            child.style.transform = 'translateY(30px)';
+                            child.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                            
+                            requestAnimationFrame(() => {
+                                child.style.opacity = '1';
+                                child.style.transform = 'translateY(0)';
+                            });
+                        }, index * 100);
+                    });
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
+
+        // Typing effect for hero subtitle
+        const typingText = document.querySelector('.typing-text');
+        if (typingText) {
+            const text = typingText.textContent;
+            typingText.textContent = '';
+            let index = 0;
+            
+            function type() {
+                if (index < text.length) {
+                    typingText.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, 100);
+                }
+            }
+            
+            setTimeout(type, 1000);
+        }
+
+        // Smooth reveal for skills on hover
+        const skillItems = document.querySelectorAll('.skill-item');
+        skillItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.cta-button, .view-pdf-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Counter animation for stats (if you want to add numbers)
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+
+        // Intersection observer for cards
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.card-lift').forEach(card => {
+            cardObserver.observe(card);
+        });
+
+        // Header scroll effect
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            if (currentScroll > 50) {
+                header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // PDF Modal Logic
+        const pdfModal = document.getElementById('pdfModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const pdfViewer = document.getElementById('pdfViewer');
+        const modalTitle = document.getElementById('modalTitle');
+        const viewPdfButtons = document.querySelectorAll('.view-pdf-button');
+
+        viewPdfButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                pdfViewer.src = button.dataset.pdfUrl;
+                modalTitle.textContent = button.dataset.title;
+                pdfModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            pdfModal.classList.add('hidden');
+            pdfViewer.src = '';
+            document.body.style.overflow = 'auto';
+        });
+        
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !pdfModal.classList.contains('hidden')) {
+                closeModalBtn.click();
+            }
+        });
+
+        // Click outside modal to close
+        pdfModal.addEventListener('click', (e) => {
+            if (e.target === pdfModal) {
+                closeModalBtn.click();
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
