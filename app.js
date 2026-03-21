@@ -2420,7 +2420,7 @@
             });
         }
 
-        if (heroResumeBtn) {
+        if (heroResumeBtn && heroResumeBtn.tagName === "BUTTON") {
             heroResumeBtn.addEventListener("click", () => {
                 const anchor = document.createElement("a");
                 anchor.href = RESUME_DOWNLOAD_URL;
