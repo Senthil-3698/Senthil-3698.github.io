@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="midnight">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline | Senthil Portfolio</title>
+    <meta name="theme-color" content="#050A18">
+    <style>
+        :root {
+            --bg: #050A18;
+            --accent: #F5A623;
+            --text: #EDF2FF;
+            --muted: rgba(237, 242, 255, 0.72);
+            --line: rgba(237, 242, 255, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Satoshi", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(700px 320px at 90% -20%, rgba(245, 166, 35, 0.16), transparent 62%),
+                radial-gradient(680px 320px at -10% 15%, rgba(144, 214, 255, 0.12), transparent 58%),
+                var(--bg);
+            display: grid;
+            place-items: center;
+            padding: 1rem;
+        }
+
+        .offline-card {
+            width: min(680px, 100%);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 24px 65px rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            border: 1px solid rgba(245, 166, 35, 0.5);
+            color: var(--accent);
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            font-size: 1.08rem;
+            margin-bottom: 0.8rem;
+            background: rgba(245, 166, 35, 0.08);
+        }
+
+        h1 {
+            font-family: "Clash Display", "Segoe UI", sans-serif;
+            font-size: clamp(1.6rem, 3.8vw, 2.35rem);
+            line-height: 1.12;
+            margin-bottom: 0.55rem;
+        }
+
+        p {
+            color: var(--muted);
+            max-width: 56ch;
+            line-height: 1.5;
+        }
+
+        .actions {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .btn {
+            min-height: 40px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            color: var(--text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.85rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+        }
+
+        .btn.primary {
+            border-color: rgba(245, 166, 35, 0.65);
+            background: rgba(245, 166, 35, 0.17);
+        }
+
+        .status {
+            margin-top: 0.9rem;
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+    <main class="offline-card" role="main" aria-live="polite">
+        <div class="badge">SKB</div>
+        <h1>You are offline right now.</h1>
+        <p>Senthil's portfolio app is still available in offline mode for cached pages. Once your connection returns, all live widgets and APIs will resume automatically.</p>
+        <div class="actions">
+            <a class="btn primary" href="/portfolio.html">Open Portfolio</a>
+            <button class="btn" id="retryBtn" type="button">Try reconnect</button>
+        </div>
+        <p class="status" id="networkStatus">Checking connection...</p>
+    </main>
+
+    <script>
+        (function () {
+            const statusEl = document.getElementById("networkStatus");
+            const retryBtn = document.getElementById("retryBtn");
+
+            function updateState() {
+                const online = navigator.onLine;
+                statusEl.textContent = online
+                    ? "Connection restored. You can return to the portfolio now."
+                    : "Still offline. Cached pages are available until connectivity returns.";
+            }
+
+            updateState();
+            window.addEventListener("online", updateState);
+            window.addEventListener("offline", updateState);
+
+            retryBtn.addEventListener("click", function () {
+                window.location.href = "/portfolio.html";
+            });
+        })();
+    </script>
+</body>
+</html>
