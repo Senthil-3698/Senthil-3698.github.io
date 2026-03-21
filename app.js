@@ -2457,7 +2457,7 @@
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.2 });
         revealElements.forEach((el) => revealObserver.observe(el));
 
         const contactSocialRow = document.getElementById("contactSocialRow");
@@ -2471,7 +2471,7 @@
                         entry.target.classList.add("in-view");
                         observer.unobserve(entry.target);
                     });
-                }, { threshold: 0.3 });
+                }, { threshold: 0.2 });
 
                 socialRowObserver.observe(contactSocialRow);
             }
@@ -3306,7 +3306,7 @@
 
                         observer.unobserve(badge);
                     });
-                }, { threshold: 0.28 });
+                }, { threshold: 0.2 });
 
                 certBadgeCards.forEach((card) => certObserver.observe(card));
             }
@@ -3353,7 +3353,7 @@
                     if (!hasVisible) return;
                     animateAboutCounters();
                     observer.disconnect();
-                }, { threshold: 0.35 });
+                }, { threshold: 0.2 });
 
                 const anchor = aboutCounterNodes[0].closest(".about-metrics-wrap") || aboutCounterNodes[0];
                 if (anchor) {
@@ -3745,7 +3745,7 @@
                 animateRiskMetrics();
                 startRiskArchitectureDots();
                 observer.disconnect();
-            }, { threshold: 0.35 });
+            }, { threshold: 0.2 });
 
             riskObserver.observe(riskSentinelCard);
         }
@@ -3915,7 +3915,7 @@
                     } else {
                         stopSecurityGridAnimation();
                     }
-                }, { threshold: 0.25 });
+                }, { threshold: 0.2 });
 
                 securityObserver.observe(securityRemediationCard);
             }
