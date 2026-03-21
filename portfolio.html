@@ -3871,6 +3871,46 @@
             border: 1px solid rgba(0, 0, 0, 0.06);
         }
 
+        .timeslotter-logo-shell {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            flex: 0 0 60px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-timeslotter {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #fff;
+            padding: 4px;
+            box-shadow: 0 6px 16px rgba(2, 6, 23, 0.18);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+        }
+
+        .timeslotter-logo-fallback {
+            display: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            background: #008080;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            box-shadow: 0 6px 16px rgba(2, 6, 23, 0.2);
+        }
+
+        .timeslotter-logo-fallback.is-visible {
+            display: inline-flex;
+        }
+
         .vit-logo-shell {
             position: relative;
             width: 60px;
@@ -4231,16 +4271,16 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: 136px;
-            min-height: 56px;
-            border-radius: 8px;
+            width: auto;
+            min-height: auto;
+            border-radius: 6px;
             background: #fff;
             border: 1px solid rgba(16, 20, 30, 0.14);
-            padding: 8px;
+            padding: 6px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+            box-shadow: 0 6px 16px rgba(2, 6, 23, 0.2);
         }
 
         .natwest-logo-img {
@@ -7157,9 +7197,10 @@
                             <img
                                 class="natwest-logo-img"
                                 loading="lazy"
-                                src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/NatWest_Group_logo.svg/320px-NatWest_Group_logo.svg.png"
+                                src="https://logo.clearbit.com/natwest.com"
                                 alt="NatWest Group logo"
-                                onerror="if(!this.dataset.nwBackupTried){this.dataset.nwBackupTried='1';this.src='https://www.natwestgroup.com/content/dam/natwest-group/logos/natwest-group-logo.png';return;}this.style.display='none';var fb=document.getElementById('natwestLogoFallback');if(fb){fb.classList.add('is-visible');fb.setAttribute('aria-hidden','false');}">
+                                onerror="return window.__experienceLogoFallback && window.__experienceLogoFallback(this);"
+                                data-fallback-target="natwestLogoFallback">
                             <span id="natwestLogoFallback" class="natwest-logo-fallback" role="img" aria-label="NatWest fallback logo" aria-hidden="true">NatWest</span>
                         </div>
 
@@ -7254,10 +7295,10 @@
 
                 <article class="timeline-item card" data-stagger="3">
                     <div class="experience-head">
-                        <picture>
-                            <source type="image/webp" srcset="https://images.weserv.nl/?url=senthil-3698.github.io/assets/img/timeslotter.jpg&output=webp&q=84" />
-                            <img class="logo" loading="lazy" src="assets/img/timeslotter.jpg" alt="Time-Slotter" onerror="return window.__skbImageFallback && window.__skbImageFallback(this);" data-fallback-initials="TS" data-fallback-color="#0f766e">
-                        </picture>
+                        <div class="timeslotter-logo-shell" aria-label="Time-Slotter logo">
+                            <img class="logo logo-timeslotter" loading="lazy" src="assets/img/timeslotter-logo.png" alt="Time-Slotter" onerror="return window.__experienceLogoFallback && window.__experienceLogoFallback(this);" data-fallback-target="timeslotterLogoFallback">
+                            <span id="timeslotterLogoFallback" class="timeslotter-logo-fallback" role="img" aria-label="Time-Slotter fallback logo" aria-hidden="true">TS</span>
+                        </div>
                         <div>
                             <h3>Marketing Analyst</h3>
                             <p class="muted">Time-Slotter Technologies Pvt Ltd | Jan 2024 - Aug 2024</p>
@@ -7691,6 +7732,29 @@
     </div>
 
     <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function initExperienceLogoFallbacks() {
+            if (window.__experienceLogoFallbackReady) return;
+            window.__experienceLogoFallbackReady = true;
+
+            window.__experienceLogoFallback = function __experienceLogoFallback(img) {
+                if (!img || img.dataset.fallbackApplied === "1") return true;
+                img.dataset.fallbackApplied = "1";
+                img.style.display = "none";
+
+                const targetId = img.getAttribute("data-fallback-target");
+                if (!targetId) return true;
+
+                const fallback = document.getElementById(targetId);
+                if (fallback) {
+                    fallback.classList.add("is-visible");
+                    fallback.setAttribute("aria-hidden", "false");
+                }
+
+                return true;
+            };
+        })();
+    </script>
     <script>
         (function initImageFallbackAndAudit() {
             if (window.__skbImageAuditReady) return;
