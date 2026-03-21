@@ -75,6 +75,7 @@
             backdrop-filter: blur(14px);
             background: rgba(5, 10, 24, 0.82);
             border-bottom: 1px solid var(--line);
+            transition: transform 0.3s ease;
         }
 
         .nav-wrap {
@@ -114,6 +115,10 @@
 
         .desktop-nav a:hover,
         .desktop-nav a.active {
+            color: var(--text);
+        }
+
+        .mobile-nav a.active {
             color: var(--text);
         }
 
@@ -229,6 +234,20 @@
             margin-bottom: 1.4rem;
         }
 
+        .typing-text::after {
+            content: "|";
+            margin-left: 0.12em;
+            color: var(--accent);
+            animation: caret-blink 0.9s step-end infinite;
+        }
+
+        @keyframes caret-blink {
+            0%,
+            49% { opacity: 1; }
+            50%,
+            100% { opacity: 0; }
+        }
+
         .hero-copy {
             color: var(--muted);
             max-width: 56ch;
@@ -307,6 +326,34 @@
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1.25rem;
+        }
+
+        .about-counters {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .counter-card {
+            border: 1px solid var(--line);
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .counter-value {
+            font-family: "Clash Display", sans-serif;
+            font-size: clamp(1.7rem, 5vw, 2.4rem);
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .counter-label {
+            color: var(--muted);
+            margin-top: 0.4rem;
+            font-size: 0.92rem;
         }
 
         .card {
@@ -530,6 +577,49 @@
             transform: translateY(0);
         }
 
+        [data-stagger] {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .reveal.show [data-stagger="1"] { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+        .reveal.show [data-stagger="2"] { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
+        .reveal.show [data-stagger="3"] { opacity: 1; transform: translateY(0); transition-delay: 0.19s; }
+        .reveal.show [data-stagger="4"] { opacity: 1; transform: translateY(0); transition-delay: 0.26s; }
+        .reveal.show [data-stagger="5"] { opacity: 1; transform: translateY(0); transition-delay: 0.33s; }
+
+        .cursor-core,
+        .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 3000;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-core {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .cursor-ring {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid rgba(245, 166, 35, 0.7);
+            transition: width 0.18s ease, height 0.18s ease, border-color 0.18s ease;
+        }
+
+        .cursor-ring.hover {
+            width: 42px;
+            height: 42px;
+            border-color: var(--accent);
+        }
+
         @media (max-width: 1024px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -579,6 +669,15 @@
             .hex-frame {
                 width: min(320px, 82vw);
             }
+
+            .about-counters {
+                grid-template-columns: 1fr;
+            }
+
+            .cursor-core,
+            .cursor-ring {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -615,7 +714,7 @@
             <div>
                 <span class="hero-kicker">Computer Science Student</span>
                 <h1 class="hero-name">Senthil <span class="accent">Kumaran</span> Balakrishnan.</h1>
-                <p class="hero-sub">I build things for the web.</p>
+                <p class="hero-sub typing-text" id="typingText">I build things for the web.</p>
                 <p class="hero-copy">I'm a detail-oriented Computer Science student, committed to leveraging my technical skills and innovative thinking to contribute to impactful projects.</p>
                 <div class="cta-row">
                     <a class="btn btn-primary" href="#contact">Get In Touch</a>
@@ -635,11 +734,25 @@
                 <h2 class="title">About Me</h2>
             </header>
             <div class="grid-2">
-                <article class="card">
+                <article class="card" data-stagger="1">
                     <p>Hello! I'm Senthil Kumaran Balakrishnan, a pre-final year Computer Science and Engineering student. I'm a dedicated and detail-oriented individual with a strong academic background, committed to leveraging technical skills and innovative thinking for impactful projects.</p>
                 </article>
-                <article class="card">
+                <article class="card" data-stagger="2">
                     <p>I am enthusiastic and motivated with a passion for technology and a solid foundation in software development. I can adapt quickly to new technologies and enjoy fostering collaborative environments. Adept at problem-solving and equipped with excellent communication skills, I thrive in dynamic settings that challenge my abilities.</p>
+                </article>
+            </div>
+            <div class="about-counters" data-stagger="3">
+                <article class="counter-card">
+                    <p class="counter-value" data-counter-target="5">0+</p>
+                    <p class="counter-label">Projects</p>
+                </article>
+                <article class="counter-card">
+                    <p class="counter-value" data-counter-target="15">0+</p>
+                    <p class="counter-label">Skills</p>
+                </article>
+                <article class="counter-card">
+                    <p class="counter-value" data-counter-target="8">0+</p>
+                    <p class="counter-label">Certifications</p>
                 </article>
             </div>
         </section>
@@ -650,7 +763,7 @@
                 <h2 class="title">My Projects</h2>
             </header>
 
-            <article class="featured">
+            <article class="featured" data-stagger="1">
                 <p class="eyebrow">Featured Final Year Project</p>
                 <h3 class="title" style="font-size: clamp(1.5rem, 3.2vw, 2.5rem); max-width: 26ch;">Intelligent Liver Disease Prediction Suite</h3>
                 <p class="muted" style="margin-top: 0.8rem;">End-to-end ML pipeline comparing algorithms (CatBoost, LightGBM, XGBoost, Random Forest, SVM, Logistic Regression, MLP) on curated liver disease datasets with automated evaluation dashboards and exportable model artifacts. The comprehensive project report captures methodology, experiments, and deployment notes.</p>
@@ -668,7 +781,7 @@
             </article>
 
             <div class="grid-2">
-                <article class="card">
+                <article class="card" data-stagger="2">
                     <h3>Restaurant Website Prototype</h3>
                     <div class="meta">
                         <span class="chip">HTML</span>
@@ -677,7 +790,7 @@
                     </div>
                     <p>Developed a static prototype of a restaurant website using HTML, CSS, and JavaScript. The site features a visually appealing homepage, interactive food menu, image gallery, and contact form with a focus on clean design and responsive layout.</p>
                 </article>
-                <article class="card">
+                <article class="card" data-stagger="3">
                     <h3>IoT-Based Health Monitoring System</h3>
                     <div class="meta">
                         <span class="chip">Arduino</span>
@@ -717,7 +830,7 @@
             </header>
 
             <div class="timeline">
-                <article class="timeline-item card">
+                <article class="timeline-item card" data-stagger="1">
                     <div class="experience-head">
                         <img class="logo" src="assets/img/sos.png" alt="Smile Over Stress">
                         <div>
@@ -731,7 +844,7 @@
                     </div>
                 </article>
 
-                <article class="timeline-item card">
+                <article class="timeline-item card" data-stagger="2">
                     <div class="experience-head">
                         <img class="logo" src="assets/img/natwest.png" alt="NatWest Group">
                         <div>
@@ -746,7 +859,7 @@
                     </div>
                 </article>
 
-                <article class="timeline-item card">
+                <article class="timeline-item card" data-stagger="3">
                     <div class="experience-head">
                         <img class="logo" src="assets/img/timeslotter.png" alt="Time-Slotter">
                         <div>
@@ -769,7 +882,7 @@
             </header>
 
             <div class="stack">
-                <article class="card">
+                <article class="card" data-stagger="1">
                     <div class="cert-head">
                         <h3>Oracle Cloud Infrastructure 2025 AI Foundations Associate</h3>
                         <span class="chip">Issued: Sep 2025</span>
@@ -781,7 +894,7 @@
                     </div>
                 </article>
 
-                <article class="card">
+                <article class="card" data-stagger="2">
                     <div class="cert-head">
                         <h3>AWS Certified Solutions Architect - Associate</h3>
                         <span class="chip">Issued: Sep 2025</span>
@@ -791,7 +904,7 @@
                     </div>
                 </article>
 
-                <article class="card">
+                <article class="card" data-stagger="3">
                     <div class="cert-head">
                         <h3>AWS Certified Cloud Practitioner</h3>
                         <span class="chip">Issued: Aug 2024</span>
@@ -801,7 +914,7 @@
                     </div>
                 </article>
 
-                <article class="card">
+                <article class="card" data-stagger="4">
                     <div class="cert-head">
                         <h3>Internet of Things in Electronics</h3>
                         <span class="chip">Issued: Sep 2024</span>
@@ -819,7 +932,7 @@
                 <h2 class="title">Education</h2>
             </header>
             <div class="grid-2">
-                <article class="card">
+                <article class="card" data-stagger="1">
                     <div class="edu-head">
                         <img class="logo" src="assets/img/vit.png" alt="VIT">
                         <div>
@@ -831,7 +944,7 @@
                     <a class="btn btn-ghost" target="_blank" rel="noopener noreferrer" href="https://vit.ac.in/schools/school-of-computer-science-and-engineering-for-ug-courses">Visit Institute</a>
                 </article>
 
-                <article class="card">
+                <article class="card" data-stagger="2">
                     <div class="edu-head">
                         <img class="logo" src="assets/img/skns.png" alt="SKNS PMC VVJC">
                         <div>
@@ -846,7 +959,7 @@
         </section>
 
         <section id="contact" class="section reveal" data-index="07">
-            <div class="contact-block">
+            <div class="contact-block" data-stagger="1">
                 <p class="eyebrow">What's Next?</p>
                 <h3>Get In Touch</h3>
                 <p>I'm currently open to new opportunities and collaborations. Whether you have a question or just want to exchange ideas, my inbox is always open.</p>
@@ -854,6 +967,9 @@
             </div>
         </section>
     </main>
+
+    <div class="cursor-core" id="cursorCore" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
     <footer class="footer">
         <p>Designed & Built by Senthil Kumaran Balakrishnan</p>
@@ -872,31 +988,211 @@
     <script>
         const menuBtn = document.getElementById("menuBtn");
         const mobileNav = document.getElementById("mobileNav");
-        menuBtn.addEventListener("click", () => {
-            mobileNav.classList.toggle("open");
-        });
+        if (menuBtn && mobileNav) {
+            menuBtn.addEventListener("click", () => {
+                mobileNav.classList.toggle("open");
+            });
 
-        document.querySelectorAll(".mobile-nav a").forEach((a) => {
-            a.addEventListener("click", () => mobileNav.classList.remove("open"));
-        });
+            const mobileNavLinks = mobileNav.querySelectorAll("a");
+            mobileNavLinks.forEach((link) => {
+                link.addEventListener("click", () => {
+                    mobileNav.classList.remove("open");
+                });
+            });
+        }
 
         const progress = document.getElementById("scrollProgress");
-        window.addEventListener("scroll", () => {
-            const max = document.documentElement.scrollHeight - window.innerHeight;
-            const ratio = max > 0 ? window.scrollY / max : 0;
-            progress.style.transform = `scaleX(${ratio})`;
-        }, { passive: true });
+        const header = document.querySelector(".site-header");
+        const sections = document.querySelectorAll("main section[id]");
+        const desktopLinks = document.querySelectorAll(".desktop-nav a");
+        const mobileLinks = document.querySelectorAll(".mobile-nav a");
 
-        const reveals = document.querySelectorAll(".reveal");
-        const io = new IntersectionObserver((entries) => {
+        let lastScrollY = window.scrollY;
+        let latestScrollY = window.scrollY;
+        let ticking = false;
+        let activeSectionId = "home";
+
+        function applyActiveNav(id) {
+            const allNavLinks = [...desktopLinks, ...mobileLinks];
+            allNavLinks.forEach((link) => {
+                link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+            });
+        }
+
+        function updateOnScrollFrame() {
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const ratio = maxScroll > 0 ? latestScrollY / maxScroll : 0;
+            progress.style.transform = `scaleX(${ratio})`;
+
+            if (latestScrollY > lastScrollY && latestScrollY > 90) {
+                header.style.transform = "translateY(-100%)";
+            } else {
+                header.style.transform = "translateY(0)";
+            }
+
+            applyActiveNav(activeSectionId);
+            lastScrollY = latestScrollY;
+            ticking = false;
+        }
+
+        function onScroll() {
+            latestScrollY = window.scrollY;
+            if (!ticking) {
+                requestAnimationFrame(updateOnScrollFrame);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        const revealElements = document.querySelectorAll(".reveal");
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("show");
-                    io.unobserve(entry.target);
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.15 });
-        reveals.forEach((el) => io.observe(el));
+        revealElements.forEach((el) => revealObserver.observe(el));
+
+        const sectionVisibility = new Map();
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const id = entry.target.id;
+                if (!id) return;
+                if (entry.isIntersecting) {
+                    sectionVisibility.set(id, entry.intersectionRatio);
+                } else {
+                    sectionVisibility.delete(id);
+                }
+            });
+
+            let bestId = activeSectionId;
+            let bestRatio = 0;
+            sectionVisibility.forEach((ratio, id) => {
+                if (ratio > bestRatio) {
+                    bestRatio = ratio;
+                    bestId = id;
+                }
+            });
+            activeSectionId = bestId;
+            onScroll();
+        }, { threshold: [0.2, 0.4, 0.6, 0.8] });
+        sections.forEach((section) => navObserver.observe(section));
+
+        const typingText = document.getElementById("typingText");
+        const typingPhrases = [
+            "I build things for the web.",
+            "I design with purpose.",
+            "I solve real problems."
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        function runTypingLoop() {
+            if (!typingText) return;
+            const currentPhrase = typingPhrases[phraseIndex];
+            typingText.textContent = deleting
+                ? currentPhrase.slice(0, charIndex--)
+                : currentPhrase.slice(0, charIndex++);
+
+            let delay = deleting ? 45 : 85;
+            if (!deleting && charIndex > currentPhrase.length) {
+                deleting = true;
+                delay = 1100;
+            }
+            if (deleting && charIndex < 0) {
+                deleting = false;
+                phraseIndex = (phraseIndex + 1) % typingPhrases.length;
+                charIndex = 0;
+                delay = 280;
+            }
+
+            setTimeout(runTypingLoop, delay);
+        }
+        runTypingLoop();
+
+        const cursorCore = document.getElementById("cursorCore");
+        const cursorRing = document.getElementById("cursorRing");
+        const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+
+        if (!coarsePointer && cursorCore && cursorRing) {
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let coreX = mouseX;
+            let coreY = mouseY;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }, { passive: true });
+
+            const hoverTargets = document.querySelectorAll("a, button");
+            hoverTargets.forEach((target) => {
+                target.addEventListener("mouseenter", () => cursorRing.classList.add("hover"));
+                target.addEventListener("mouseleave", () => cursorRing.classList.remove("hover"));
+            });
+
+            function animateCursor() {
+                coreX += (mouseX - coreX) * 0.1;
+                coreY += (mouseY - coreY) * 0.1;
+                ringX += (mouseX - ringX) * 0.1;
+                ringY += (mouseY - ringY) * 0.1;
+
+                cursorCore.style.transform = `translate(${coreX}px, ${coreY}px) translate(-50%, -50%)`;
+                cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+        }
+
+        const counters = document.querySelectorAll("[data-counter-target]");
+        let countersStarted = false;
+        const aboutSection = document.getElementById("about");
+
+        function startCounters() {
+            if (countersStarted) return;
+            countersStarted = true;
+
+            counters.forEach((counter) => {
+                const target = Number(counter.getAttribute("data-counter-target"));
+                let current = 0;
+                const duration = 1300;
+                const startTime = performance.now();
+
+                function updateCounter(now) {
+                    const elapsed = now - startTime;
+                    const progressValue = Math.min(elapsed / duration, 1);
+                    current = Math.floor(progressValue * target);
+                    counter.textContent = `${current}+`;
+                    if (progressValue < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = `${target}+`;
+                    }
+                }
+
+                requestAnimationFrame(updateCounter);
+            });
+        }
+
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    startCounters();
+                    aboutObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.35 });
+
+        if (aboutSection) {
+            aboutObserver.observe(aboutSection);
+        }
 
         const pdfModal = document.getElementById("pdfModal");
         const pdfViewer = document.getElementById("pdfViewer");
@@ -929,19 +1225,6 @@
                 closeModal();
             }
         });
-
-        const sections = document.querySelectorAll("main section[id]");
-        const navLinks = document.querySelectorAll(".desktop-nav a");
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                const id = entry.target.getAttribute("id");
-                navLinks.forEach((link) => {
-                    link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
-                });
-            });
-        }, { threshold: 0.5 });
-        sections.forEach((s) => sectionObserver.observe(s));
     </script>
 </body>
 </html>
