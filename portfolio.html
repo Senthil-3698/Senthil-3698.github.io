@@ -201,6 +201,22 @@
             grid-template-columns: 1.1fr 0.9fr;
             gap: 3rem;
             align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-constellation {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.88;
+        }
+
+        .hero > div {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-kicker {
@@ -254,6 +270,51 @@
             margin-bottom: 2rem;
         }
 
+        .hero-stat-pills {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .stat-pill-float {
+            position: absolute;
+            border: 1px solid rgba(245, 166, 35, 0.36);
+            background: rgba(5, 10, 24, 0.72);
+            color: var(--text);
+            border-radius: 999px;
+            padding: 0.42rem 0.78rem;
+            font-size: 0.78rem;
+            backdrop-filter: blur(7px);
+            animation: hero-drift 8s ease-in-out infinite;
+        }
+
+        .stat-pill-float:nth-child(1) {
+            top: 14%;
+            left: 46%;
+            animation-duration: 9.2s;
+        }
+
+        .stat-pill-float:nth-child(2) {
+            top: 55%;
+            left: 8%;
+            animation-duration: 7.4s;
+            animation-delay: -1.4s;
+        }
+
+        .stat-pill-float:nth-child(3) {
+            top: 80%;
+            left: 51%;
+            animation-duration: 10.1s;
+            animation-delay: -2.2s;
+        }
+
+        @keyframes hero-drift {
+            0%,
+            100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -12px, 0); }
+        }
+
         .cta-row {
             display: flex;
             gap: 0.9rem;
@@ -284,6 +345,11 @@
             background: #ffc05a;
         }
 
+        .magnetic-btn {
+            transition: transform 0.16s ease, background 0.24s ease;
+            will-change: transform;
+        }
+
         .btn-ghost {
             border-color: var(--line);
             color: var(--text);
@@ -302,6 +368,29 @@
             position: relative;
         }
 
+        .hero-blob-svg {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .hero-blob-wrap {
+            position: absolute;
+            width: min(520px, 90vw);
+            aspect-ratio: 1;
+            z-index: 0;
+            opacity: 0.66;
+        }
+
+        .hero-blob-gradient {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 34% 28%, rgba(245, 166, 35, 0.64), rgba(245, 166, 35, 0.2) 46%, rgba(5, 10, 24, 0.08));
+            clip-path: url(#heroBlobClip);
+            transform: rotate(7deg);
+        }
+
         .hex-frame {
             width: min(420px, 80vw);
             aspect-ratio: 0.88;
@@ -311,6 +400,8 @@
             transform: rotate(-7deg);
             padding: 0.8rem;
             box-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+            position: relative;
+            z-index: 1;
         }
 
         .hex-frame img {
@@ -730,6 +821,10 @@
                 padding-top: 1rem;
             }
 
+            .hero-stat-pills {
+                display: none;
+            }
+
             .hero-name {
                 max-width: 12ch;
             }
@@ -773,6 +868,10 @@
                 width: min(320px, 82vw);
             }
 
+            .hero-blob-wrap {
+                width: min(390px, 90vw);
+            }
+
             .about-counters {
                 grid-template-columns: 1fr;
             }
@@ -814,17 +913,41 @@
 
     <main>
         <section id="home" class="section hero reveal" data-index="00">
+            <canvas class="hero-constellation" id="heroConstellation" aria-hidden="true"></canvas>
+            <div class="hero-stat-pills" aria-hidden="true">
+                <span class="stat-pill-float">🎓 Pre-Final Year</span>
+                <span class="stat-pill-float">💡 ML Enthusiast</span>
+                <span class="stat-pill-float">☁️ AWS Certified</span>
+            </div>
             <div>
                 <span class="hero-kicker">Computer Science Student</span>
                 <h1 class="hero-name">Senthil <span class="accent">Kumaran</span> Balakrishnan.</h1>
                 <p class="hero-sub typing-text" id="typingText">I build things for the web.</p>
                 <p class="hero-copy">I'm a detail-oriented Computer Science student, committed to leveraging my technical skills and innovative thinking to contribute to impactful projects.</p>
                 <div class="cta-row">
-                    <a class="btn btn-primary" href="#contact">Get In Touch</a>
+                    <a class="btn btn-primary magnetic-btn" id="magneticCta" href="#contact">Get In Touch</a>
                     <a class="btn btn-ghost" href="#projects">View Projects</a>
                 </div>
             </div>
             <div class="hero-media">
+                <svg class="hero-blob-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <clipPath id="heroBlobClip" clipPathUnits="objectBoundingBox">
+                            <path id="heroBlobPath" d="M0.48,0.04 C0.72,0.01 0.97,0.17 0.98,0.43 C1.00,0.68 0.84,0.94 0.58,0.98 C0.34,1.01 0.08,0.90 0.03,0.65 C-0.01,0.41 0.09,0.12 0.32,0.06 C0.37,0.04 0.43,0.04 0.48,0.04 Z">
+                                <animate attributeName="d" dur="8s" repeatCount="indefinite"
+                                    values="
+                                    M0.48,0.04 C0.72,0.01 0.97,0.17 0.98,0.43 C1.00,0.68 0.84,0.94 0.58,0.98 C0.34,1.01 0.08,0.90 0.03,0.65 C-0.01,0.41 0.09,0.12 0.32,0.06 C0.37,0.04 0.43,0.04 0.48,0.04 Z;
+                                    M0.44,0.02 C0.68,-0.02 0.96,0.15 0.99,0.40 C1.03,0.62 0.92,0.88 0.69,0.96 C0.44,1.05 0.15,0.98 0.05,0.74 C-0.03,0.51 0.02,0.21 0.22,0.09 C0.28,0.05 0.36,0.03 0.44,0.02 Z;
+                                    M0.50,0.05 C0.75,0.02 0.96,0.22 0.95,0.46 C0.94,0.71 0.77,0.96 0.51,0.97 C0.29,0.99 0.07,0.86 0.03,0.63 C0.00,0.44 0.07,0.17 0.28,0.09 C0.34,0.06 0.42,0.05 0.50,0.05 Z;
+                                    M0.46,0.03 C0.70,-0.01 0.95,0.13 0.99,0.38 C1.03,0.61 0.95,0.88 0.74,0.97 C0.49,1.08 0.19,1.00 0.06,0.78 C-0.05,0.56 -0.00,0.23 0.19,0.10 C0.26,0.05 0.36,0.03 0.46,0.03 Z;
+                                    M0.48,0.04 C0.72,0.01 0.97,0.17 0.98,0.43 C1.00,0.68 0.84,0.94 0.58,0.98 C0.34,1.01 0.08,0.90 0.03,0.65 C-0.01,0.41 0.09,0.12 0.32,0.06 C0.37,0.04 0.43,0.04 0.48,0.04 Z" />
+                            </path>
+                        </clipPath>
+                    </defs>
+                </svg>
+                <div class="hero-blob-wrap" aria-hidden="true">
+                    <div class="hero-blob-gradient"></div>
+                </div>
                 <figure class="hex-frame">
                     <img src="assets/img/profile.png" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Senthil+Kumaran+Balakrishnan&size=400&background=0f172a&color=edf2ff&bold=true';" alt="Senthil Kumaran Balakrishnan">
                 </figure>
@@ -1224,36 +1347,143 @@
         }, { threshold: [0.2, 0.4, 0.6, 0.8] });
         sections.forEach((section) => navObserver.observe(section));
 
+        const heroSection = document.getElementById("home");
+        const constellationCanvas = document.getElementById("heroConstellation");
+
+        if (heroSection && constellationCanvas) {
+            const ctx = constellationCanvas.getContext("2d");
+            const mouse = { x: -9999, y: -9999 };
+            let particles = [];
+
+            function resizeConstellation() {
+                constellationCanvas.width = heroSection.clientWidth;
+                constellationCanvas.height = heroSection.clientHeight;
+                const count = Math.max(36, Math.min(72, Math.floor(constellationCanvas.width / 20)));
+                particles = Array.from({ length: count }, () => ({
+                    x: Math.random() * constellationCanvas.width,
+                    y: Math.random() * constellationCanvas.height,
+                    vx: (Math.random() - 0.5) * 0.35,
+                    vy: (Math.random() - 0.5) * 0.35,
+                    r: Math.random() * 1.7 + 1.1
+                }));
+            }
+
+            function drawConstellation() {
+                ctx.clearRect(0, 0, constellationCanvas.width, constellationCanvas.height);
+
+                for (let i = 0; i < particles.length; i += 1) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > constellationCanvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > constellationCanvas.height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(237, 242, 255, 0.45)";
+                    ctx.fill();
+                }
+
+                for (let i = 0; i < particles.length; i += 1) {
+                    for (let j = i + 1; j < particles.length; j += 1) {
+                        const a = particles[i];
+                        const b = particles[j];
+                        const dx = a.x - b.x;
+                        const dy = a.y - b.y;
+                        const dist = Math.hypot(dx, dy);
+
+                        const mouseDistA = Math.hypot(mouse.x - a.x, mouse.y - a.y);
+                        const mouseDistB = Math.hypot(mouse.x - b.x, mouse.y - b.y);
+                        const nearMouse = mouseDistA < 120 || mouseDistB < 120;
+
+                        if (dist < 95 && nearMouse) {
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.strokeStyle = `rgba(245, 166, 35, ${0.18 - dist / 900})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(drawConstellation);
+            }
+
+            heroSection.addEventListener("mousemove", (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            }, { passive: true });
+
+            heroSection.addEventListener("mouseleave", () => {
+                mouse.x = -9999;
+                mouse.y = -9999;
+            });
+
+            window.addEventListener("resize", resizeConstellation);
+            resizeConstellation();
+            drawConstellation();
+        }
+
         const typingText = document.getElementById("typingText");
         const typingPhrases = [
             "I build things for the web.",
             "I design with purpose.",
             "I solve real problems."
         ];
+        const asciiCharset = "!@#$%&*+=<>?/\\[]{}0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         let phraseIndex = 0;
         let charIndex = 0;
-        let deleting = false;
+        let typingMode = "typing";
+
+        function makeAsciiDissolve(text, intensity) {
+            return text
+                .split("")
+                .map((char) => {
+                    if (char === " ") return " ";
+                    return Math.random() < intensity
+                        ? asciiCharset[Math.floor(Math.random() * asciiCharset.length)]
+                        : char;
+                })
+                .join("");
+        }
 
         function runTypingLoop() {
             if (!typingText) return;
             const currentPhrase = typingPhrases[phraseIndex];
-            typingText.textContent = deleting
-                ? currentPhrase.slice(0, charIndex--)
-                : currentPhrase.slice(0, charIndex++);
 
-            let delay = deleting ? 45 : 85;
-            if (!deleting && charIndex > currentPhrase.length) {
-                deleting = true;
-                delay = 1100;
-            }
-            if (deleting && charIndex < 0) {
-                deleting = false;
-                phraseIndex = (phraseIndex + 1) % typingPhrases.length;
-                charIndex = 0;
-                delay = 280;
+            if (typingMode === "typing") {
+                typingText.textContent = currentPhrase.slice(0, charIndex + 1);
+                charIndex += 1;
+
+                if (charIndex >= currentPhrase.length) {
+                    typingMode = "dissolve";
+                    setTimeout(runTypingLoop, 700);
+                    return;
+                }
+
+                setTimeout(runTypingLoop, 72);
+                return;
             }
 
-            setTimeout(runTypingLoop, delay);
+            if (typingMode === "dissolve") {
+                let frame = 0;
+                const maxFrames = 8;
+                const dissolveTimer = setInterval(() => {
+                    frame += 1;
+                    typingText.textContent = makeAsciiDissolve(currentPhrase, frame / maxFrames);
+                    if (frame >= maxFrames) {
+                        clearInterval(dissolveTimer);
+                        typingText.textContent = "";
+                        phraseIndex = (phraseIndex + 1) % typingPhrases.length;
+                        charIndex = 0;
+                        typingMode = "typing";
+                        setTimeout(runTypingLoop, 120);
+                    }
+                }, 42);
+            }
         }
         runTypingLoop();
 
@@ -1291,6 +1521,31 @@
                 requestAnimationFrame(animateCursor);
             }
             animateCursor();
+        }
+
+        const magneticCta = document.getElementById("magneticCta");
+        if (magneticCta && !coarsePointer) {
+            window.addEventListener("mousemove", (e) => {
+                const rect = magneticCta.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                const dx = e.clientX - cx;
+                const dy = e.clientY - cy;
+                const dist = Math.hypot(dx, dy);
+
+                if (dist < 80) {
+                    const strength = (80 - dist) / 80;
+                    const tx = dx * 0.2 * strength;
+                    const ty = dy * 0.2 * strength;
+                    magneticCta.style.transform = `translate(${tx}px, ${ty}px)`;
+                } else {
+                    magneticCta.style.transform = "translate(0, 0)";
+                }
+            }, { passive: true });
+
+            magneticCta.addEventListener("mouseleave", () => {
+                magneticCta.style.transform = "translate(0, 0)";
+            });
         }
 
         const counters = document.querySelectorAll("[data-counter-target]");
