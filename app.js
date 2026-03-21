@@ -2420,7 +2420,7 @@
             });
         }
 
-        if (heroResumeBtn && heroResumeBtn.tagName === "BUTTON") {
+        if (heroResumeBtn && heroResumeBtn.tagName === "BUTTON" && !heroResumeBtn.classList.contains("view-pdf-button")) {
             heroResumeBtn.addEventListener("click", () => {
                 const anchor = document.createElement("a");
                 anchor.href = RESUME_DOWNLOAD_URL;
