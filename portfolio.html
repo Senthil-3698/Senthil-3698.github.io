@@ -470,12 +470,149 @@
             color: var(--muted);
         }
 
-        .featured {
-            border: 1px solid rgba(245, 166, 35, 0.45);
-            border-radius: 22px;
-            background: linear-gradient(160deg, rgba(245, 166, 35, 0.08), rgba(255, 255, 255, 0.02));
-            padding: 1.4rem;
-            margin-bottom: 1.25rem;
+        .projects-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .filter-btn {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--muted);
+            border-radius: 999px;
+            padding: 0.38rem 0.8rem;
+            font-size: 0.83rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: rgba(245, 166, 35, 0.7);
+            color: var(--text);
+            background: rgba(245, 166, 35, 0.12);
+        }
+
+        .projects-bento {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .project-card {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.18s ease, border-color 0.2s ease, opacity 0.35s ease;
+        }
+
+        .project-card:hover {
+            border-color: rgba(245, 166, 35, 0.5);
+        }
+
+        .project-main {
+            grid-column: span 6;
+        }
+
+        .project-mini {
+            grid-column: span 4;
+        }
+
+        .browser-mock {
+            border: 1px solid rgba(237, 242, 255, 0.14);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 0.9rem;
+            background: #0c1224;
+        }
+
+        .browser-top {
+            height: 30px;
+            display: flex;
+            align-items: center;
+            gap: 0.42rem;
+            padding: 0 0.65rem;
+            background: #2b2f3a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .browser-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        .browser-dot.red { background: #ff5f57; }
+        .browser-dot.yellow { background: #ffbd2e; }
+        .browser-dot.green { background: #28ca41; }
+
+        .browser-screen {
+            aspect-ratio: 16 / 10;
+            width: 100%;
+            object-fit: cover;
+            background: #111827;
+        }
+
+        .project-card h3 {
+            font-family: "Clash Display", sans-serif;
+            font-size: 1.22rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .project-card .meta {
+            margin-top: 0;
+            margin-bottom: 0.4rem;
+        }
+
+        .case-study-link {
+            position: absolute;
+            left: 1rem;
+            right: 1rem;
+            bottom: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transform: translateY(140%);
+            opacity: 0;
+            transition: transform 0.28s ease, opacity 0.28s ease;
+        }
+
+        .project-card:hover .case-study-link {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+
+        .project-card .inner-content {
+            padding-bottom: 1.8rem;
+        }
+
+        .project-card.filter-leave {
+            opacity: 0;
+            transform: translateY(10px) scale(0.985);
+            pointer-events: none;
+        }
+
+        .project-card.filter-hidden {
+            display: none;
+        }
+
+        .project-card.filter-enter {
+            opacity: 0;
+            transform: translateY(10px) scale(0.985);
         }
 
         .meta {
@@ -836,6 +973,11 @@
             .grid-2 {
                 grid-template-columns: 1fr;
             }
+
+            .project-main,
+            .project-mini {
+                grid-column: span 6;
+            }
         }
 
         @media (max-width: 760px) {
@@ -874,6 +1016,15 @@
 
             .about-counters {
                 grid-template-columns: 1fr;
+            }
+
+            .projects-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .project-main,
+            .project-mini {
+                grid-column: span 1;
             }
 
             .cursor-core,
@@ -989,41 +1140,103 @@
                 <h2 class="title">My Projects</h2>
             </header>
 
-            <article class="featured" data-stagger="1">
-                <p class="eyebrow">Featured Final Year Project</p>
-                <h3 class="title" style="font-size: clamp(1.5rem, 3.2vw, 2.5rem); max-width: 26ch;">Intelligent Liver Disease Prediction Suite</h3>
-                <p class="muted" style="margin-top: 0.8rem;">End-to-end ML pipeline comparing algorithms (CatBoost, LightGBM, XGBoost, Random Forest, SVM, Logistic Regression, MLP) on curated liver disease datasets with automated evaluation dashboards and exportable model artifacts. The comprehensive project report captures methodology, experiments, and deployment notes.</p>
-                <div class="meta">
-                    <span class="chip">Python</span>
-                    <span class="chip">MLflow</span>
-                    <span class="chip">LightGBM</span>
-                    <span class="chip">XGBoost</span>
-                    <span class="chip">Pandas</span>
-                </div>
-                <div class="cta-row">
-                    <a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/drive/folders/1ptJduwU8iCWoEeaoTW1dq2YDXl7N_2U4?usp=drive_link">View Project Folder</a>
-                    <button class="btn btn-ghost view-pdf-button" data-pdf-url="https://drive.google.com/file/d/12gB4VBAbcjNoTlHa7c0vBDbTXWr86lx9/preview" data-title="Final Year Project Report">View Report</button>
-                </div>
-            </article>
+            <div class="projects-filter" data-stagger="1">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="iot">IoT</button>
+                <button class="filter-btn" data-filter="ml">ML</button>
+            </div>
 
-            <div class="grid-2">
-                <article class="card" data-stagger="2">
-                    <h3>Restaurant Website Prototype</h3>
-                    <div class="meta">
-                        <span class="chip">HTML</span>
-                        <span class="chip">CSS</span>
-                        <span class="chip">JavaScript</span>
+            <div class="projects-bento" data-stagger="2" id="projectsBento">
+                <article class="project-card project-main" data-category="ml" data-tilt>
+                    <div class="browser-mock">
+                        <div class="browser-top">
+                            <span class="browser-dot red"></span>
+                            <span class="browser-dot yellow"></span>
+                            <span class="browser-dot green"></span>
+                        </div>
+                        <img class="browser-screen" src="https://placehold.co/1200x750/0f172a/edf2ff?text=ML+Dashboard+Preview" alt="Intelligent Liver Disease Prediction Suite preview">
                     </div>
-                    <p>Developed a static prototype of a restaurant website using HTML, CSS, and JavaScript. The site features a visually appealing homepage, interactive food menu, image gallery, and contact form with a focus on clean design and responsive layout.</p>
+                    <div class="inner-content">
+                        <h3>Intelligent Liver Disease Prediction Suite</h3>
+                        <div class="meta">
+                            <span class="chip">Python</span>
+                            <span class="chip">MLflow</span>
+                            <span class="chip">LightGBM</span>
+                            <span class="chip">XGBoost</span>
+                        </div>
+                        <p>End-to-end ML pipeline comparing CatBoost, LightGBM, XGBoost, Random Forest, SVM, Logistic Regression, and MLP with automated evaluation dashboards and exportable model artifacts.</p>
+                    </div>
+                    <a class="case-study-link" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/drive/folders/1ptJduwU8iCWoEeaoTW1dq2YDXl7N_2U4?usp=drive_link">Case Study →</a>
                 </article>
-                <article class="card" data-stagger="3">
-                    <h3>IoT-Based Health Monitoring System</h3>
-                    <div class="meta">
-                        <span class="chip">Arduino</span>
-                        <span class="chip">IoT</span>
-                        <span class="chip">ThingSpeak</span>
+
+                <article class="project-card project-main" data-category="iot" data-tilt>
+                    <div class="browser-mock">
+                        <div class="browser-top">
+                            <span class="browser-dot red"></span>
+                            <span class="browser-dot yellow"></span>
+                            <span class="browser-dot green"></span>
+                        </div>
+                        <img class="browser-screen" src="https://placehold.co/1200x750/0f172a/edf2ff?text=IoT+Health+Monitor" alt="IoT Based Health Monitoring System preview">
                     </div>
-                    <p>Designed and developed a real-time health monitoring system using Arduino, LM35, and Pulse Sensor. Data is transmitted via ESP8226 to ThingSpeak cloud, enabling continuous tracking of heart rate and body temperature.</p>
+                    <div class="inner-content">
+                        <h3>IoT-Based Health Monitoring System</h3>
+                        <div class="meta">
+                            <span class="chip">Arduino</span>
+                            <span class="chip">IoT</span>
+                            <span class="chip">ThingSpeak</span>
+                        </div>
+                        <p>Real-time health monitoring solution using Arduino, LM35, and Pulse Sensor with ESP8226 integration for continuous cloud-based telemetry tracking.</p>
+                    </div>
+                    <button class="case-study-link view-pdf-button" data-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-title="IoT Project Brief" type="button">Case Study →</button>
+                </article>
+
+                <article class="project-card project-mini" data-category="web" data-tilt>
+                    <div class="browser-mock">
+                        <div class="browser-top">
+                            <span class="browser-dot red"></span>
+                            <span class="browser-dot yellow"></span>
+                            <span class="browser-dot green"></span>
+                        </div>
+                        <img class="browser-screen" src="https://placehold.co/900x620/0f172a/edf2ff?text=Restaurant+Website" alt="Restaurant Website Prototype preview">
+                    </div>
+                    <div class="inner-content">
+                        <h3>Restaurant Website Prototype</h3>
+                        <p>Static website prototype with interactive menu, gallery, and contact layout built using HTML, CSS, and JavaScript.</p>
+                    </div>
+                    <button class="case-study-link view-pdf-button" data-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-title="Restaurant Prototype Notes" type="button">Case Study →</button>
+                </article>
+
+                <article class="project-card project-mini" data-category="web" data-tilt>
+                    <div class="browser-mock">
+                        <div class="browser-top">
+                            <span class="browser-dot red"></span>
+                            <span class="browser-dot yellow"></span>
+                            <span class="browser-dot green"></span>
+                        </div>
+                        <img class="browser-screen" src="https://placehold.co/900x620/0f172a/edf2ff?text=Portfolio+UI+System" alt="Portfolio UI System preview">
+                    </div>
+                    <div class="inner-content">
+                        <h3>Portfolio UI System</h3>
+                        <p>A reusable UI and interaction system for this portfolio with modular sections, responsive layout, and interactive motion patterns.</p>
+                    </div>
+                    <button class="case-study-link view-pdf-button" data-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-title="Portfolio UI Case Study" type="button">Case Study →</button>
+                </article>
+
+                <article class="project-card project-mini" data-category="ml" data-tilt>
+                    <div class="browser-mock">
+                        <div class="browser-top">
+                            <span class="browser-dot red"></span>
+                            <span class="browser-dot yellow"></span>
+                            <span class="browser-dot green"></span>
+                        </div>
+                        <img class="browser-screen" src="https://placehold.co/900x620/0f172a/edf2ff?text=Model+Evaluation+Lab" alt="Model Evaluation Lab preview">
+                    </div>
+                    <div class="inner-content">
+                        <h3>Model Evaluation Lab</h3>
+                        <p>Experiment notebook stack for model benchmarking, feature testing, and comparative performance tracking.</p>
+                    </div>
+                    <button class="case-study-link view-pdf-button" data-pdf-url="https://drive.google.com/file/d/12gB4VBAbcjNoTlHa7c0vBDbTXWr86lx9/preview" data-title="Model Evaluation Lab" type="button">Case Study →</button>
                 </article>
             </div>
         </section>
@@ -1551,6 +1764,56 @@
         const counters = document.querySelectorAll("[data-counter-target]");
         let countersStarted = false;
         const aboutSection = document.getElementById("about");
+
+        const projectCards = document.querySelectorAll("[data-tilt]");
+        projectCards.forEach((card) => {
+            card.addEventListener("mousemove", (e) => {
+                const rect = card.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width;
+                const py = (e.clientY - rect.top) / rect.height;
+                const rotateY = (px - 0.5) * 10;
+                const rotateX = (0.5 - py) * 10;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+            });
+
+            card.addEventListener("mouseleave", () => {
+                card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+            });
+        });
+
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const filterCards = document.querySelectorAll(".project-card[data-category]");
+
+        function applyProjectFilter(filterValue) {
+            filterCards.forEach((card) => {
+                const category = card.getAttribute("data-category");
+                const shouldShow = filterValue === "all" || category === filterValue;
+
+                if (shouldShow) {
+                    if (card.classList.contains("filter-hidden")) {
+                        card.classList.remove("filter-hidden");
+                        card.classList.add("filter-enter");
+                        requestAnimationFrame(() => {
+                            card.classList.remove("filter-enter");
+                        });
+                    }
+                } else {
+                    card.classList.add("filter-leave");
+                    setTimeout(() => {
+                        card.classList.add("filter-hidden");
+                        card.classList.remove("filter-leave");
+                    }, 260);
+                }
+            });
+        }
+
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                filterButtons.forEach((btn) => btn.classList.remove("active"));
+                button.classList.add("active");
+                applyProjectFilter(button.dataset.filter || "all");
+            });
+        });
 
         function startCounters() {
             if (countersStarted) return;
