@@ -7,9 +7,10 @@
 
     <meta property="og:title" content="Senthil Kumaran Balakrishnan - Portfolio">
     <meta property="og:description" content="Computer Science student and web developer portfolio.">
-    <meta property="og:image" content="https://senthil-3698.github.io/profile.png">
+    <meta property="og:image" content="https://senthil-3698.github.io/assets/og/portfolio-og-1200x630.svg">
     <meta property="og:url" content="https://senthil-3698.github.io/portfolio.html">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://senthil-3698.github.io/assets/og/portfolio-og-1200x630.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,6 +45,19 @@
             color: var(--text);
             line-height: 1.55;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: -20%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.045;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.65) 0.6px, transparent 0.8px);
+            background-size: 3px 3px;
+            filter: url(#grainNoise);
         }
 
         a {
@@ -347,6 +361,9 @@
 
         .magnetic-btn {
             transition: transform 0.16s ease, background 0.24s ease;
+        }
+
+        .magnetic-btn.is-magnetic-active {
             will-change: transform;
         }
 
@@ -951,6 +968,58 @@
             border-color: var(--accent);
         }
 
+        .back-to-top {
+            position: fixed;
+            right: 1.1rem;
+            bottom: 1.1rem;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(5, 10, 24, 0.9);
+            border: 1px solid rgba(245, 166, 35, 0.45);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.24s ease, transform 0.24s ease;
+            z-index: 2400;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top svg {
+            position: absolute;
+            inset: 0;
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
+
+        .back-to-top .ring-bg {
+            fill: none;
+            stroke: rgba(237, 242, 255, 0.2);
+            stroke-width: 3;
+        }
+
+        .back-to-top .ring-progress {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 138.23;
+            stroke-dashoffset: 138.23;
+        }
+
+        .back-to-top .arrow {
+            font-size: 1.02rem;
+            line-height: 1;
+        }
+
         @media (max-width: 1024px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -1032,9 +1101,32 @@
                 display: none;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+
+            .cursor-core,
+            .cursor-ring,
+            .hero-constellation {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <svg width="0" height="0" style="position:absolute;visibility:hidden" aria-hidden="true" focusable="false">
+        <filter id="grainNoise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+    </svg>
+
     <div class="scroll-progress" id="scrollProgress"></div>
 
     <header class="site-header">
@@ -1155,7 +1247,7 @@
                             <span class="browser-dot yellow"></span>
                             <span class="browser-dot green"></span>
                         </div>
-                        <img class="browser-screen" src="https://placehold.co/1200x750/0f172a/edf2ff?text=ML+Dashboard+Preview" alt="Intelligent Liver Disease Prediction Suite preview">
+                        <img class="browser-screen" loading="lazy" src="https://placehold.co/1200x750/0f172a/edf2ff?text=ML+Dashboard+Preview" alt="Intelligent Liver Disease Prediction Suite preview">
                     </div>
                     <div class="inner-content">
                         <h3>Intelligent Liver Disease Prediction Suite</h3>
@@ -1177,7 +1269,7 @@
                             <span class="browser-dot yellow"></span>
                             <span class="browser-dot green"></span>
                         </div>
-                        <img class="browser-screen" src="https://placehold.co/1200x750/0f172a/edf2ff?text=IoT+Health+Monitor" alt="IoT Based Health Monitoring System preview">
+                        <img class="browser-screen" loading="lazy" src="https://placehold.co/1200x750/0f172a/edf2ff?text=IoT+Health+Monitor" alt="IoT Based Health Monitoring System preview">
                     </div>
                     <div class="inner-content">
                         <h3>IoT-Based Health Monitoring System</h3>
@@ -1198,7 +1290,7 @@
                             <span class="browser-dot yellow"></span>
                             <span class="browser-dot green"></span>
                         </div>
-                        <img class="browser-screen" src="https://placehold.co/900x620/0f172a/edf2ff?text=Restaurant+Website" alt="Restaurant Website Prototype preview">
+                        <img class="browser-screen" loading="lazy" src="https://placehold.co/900x620/0f172a/edf2ff?text=Restaurant+Website" alt="Restaurant Website Prototype preview">
                     </div>
                     <div class="inner-content">
                         <h3>Restaurant Website Prototype</h3>
@@ -1214,7 +1306,7 @@
                             <span class="browser-dot yellow"></span>
                             <span class="browser-dot green"></span>
                         </div>
-                        <img class="browser-screen" src="https://placehold.co/900x620/0f172a/edf2ff?text=Portfolio+UI+System" alt="Portfolio UI System preview">
+                        <img class="browser-screen" loading="lazy" src="https://placehold.co/900x620/0f172a/edf2ff?text=Portfolio+UI+System" alt="Portfolio UI System preview">
                     </div>
                     <div class="inner-content">
                         <h3>Portfolio UI System</h3>
@@ -1230,7 +1322,7 @@
                             <span class="browser-dot yellow"></span>
                             <span class="browser-dot green"></span>
                         </div>
-                        <img class="browser-screen" src="https://placehold.co/900x620/0f172a/edf2ff?text=Model+Evaluation+Lab" alt="Model Evaluation Lab preview">
+                        <img class="browser-screen" loading="lazy" src="https://placehold.co/900x620/0f172a/edf2ff?text=Model+Evaluation+Lab" alt="Model Evaluation Lab preview">
                     </div>
                     <div class="inner-content">
                         <h3>Model Evaluation Lab</h3>
@@ -1310,7 +1402,7 @@
             <div class="timeline">
                 <article class="timeline-item card" data-stagger="1">
                     <div class="experience-head">
-                        <img class="logo" src="assets/img/sos.png" alt="Smile Over Stress">
+                        <img class="logo" loading="lazy" src="assets/img/sos.png" alt="Smile Over Stress">
                         <div>
                             <h3>Management Team</h3>
                             <p class="muted">Smile Over Stress (SOS-VIT) | Jan 2023 - Present</p>
@@ -1324,7 +1416,7 @@
 
                 <article class="timeline-item card" data-stagger="2">
                     <div class="experience-head">
-                        <img class="logo" src="assets/img/natwest.png" alt="NatWest Group">
+                        <img class="logo" loading="lazy" src="assets/img/natwest.png" alt="NatWest Group">
                         <div>
                             <h3>Software Engineer Intern</h3>
                             <p class="muted">Sandhata Technologies (Client: NatWest Group) | May 2025 - July 2025</p>
@@ -1339,7 +1431,7 @@
 
                 <article class="timeline-item card" data-stagger="3">
                     <div class="experience-head">
-                        <img class="logo" src="assets/img/timeslotter.png" alt="Time-Slotter">
+                        <img class="logo" loading="lazy" src="assets/img/timeslotter.png" alt="Time-Slotter">
                         <div>
                             <h3>Marketing Analyst</h3>
                             <p class="muted">Time-Slotter Technologies Pvt Ltd | Jan 2024 - Aug 2024</p>
@@ -1412,7 +1504,7 @@
             <div class="grid-2">
                 <article class="card" data-stagger="1">
                     <div class="edu-head">
-                        <img class="logo" src="assets/img/vit.png" alt="VIT">
+                        <img class="logo" loading="lazy" src="assets/img/vit.png" alt="VIT">
                         <div>
                             <h3>B.Tech Computer Science and Engineering</h3>
                             <p class="muted">Vellore Institute of Technology, Vellore (VIT)</p>
@@ -1424,7 +1516,7 @@
 
                 <article class="card" data-stagger="2">
                     <div class="edu-head">
-                        <img class="logo" src="assets/img/skns.png" alt="SKNS PMC VVJC">
+                        <img class="logo" loading="lazy" src="assets/img/skns.png" alt="SKNS PMC VVJC">
                         <div>
                             <h3>Higher Secondary Education</h3>
                             <p class="muted">SKNS PMC VVJC, Chennai</p>
@@ -1448,6 +1540,14 @@
 
     <div class="cursor-core" id="cursorCore" aria-hidden="true"></div>
     <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 52 52" aria-hidden="true" focusable="false">
+            <circle class="ring-bg" cx="26" cy="26" r="22"></circle>
+            <circle class="ring-progress" id="backToTopRing" cx="26" cy="26" r="22"></circle>
+        </svg>
+        <span class="arrow">↑</span>
+    </button>
 
     <footer class="footer">
         <p>Designed & Built by Senthil Kumaran Balakrishnan</p>
@@ -1481,6 +1581,9 @@
 
         const progress = document.getElementById("scrollProgress");
         const header = document.querySelector(".site-header");
+        const backToTop = document.getElementById("backToTop");
+        const backToTopRing = document.getElementById("backToTopRing");
+        const ringCircumference = 138.23;
         const sections = document.querySelectorAll("main section[id]");
         const desktopLinks = document.querySelectorAll(".desktop-nav a");
         const mobileLinks = document.querySelectorAll(".mobile-nav a");
@@ -1501,6 +1604,11 @@
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             const ratio = maxScroll > 0 ? latestScrollY / maxScroll : 0;
             progress.style.transform = `scaleX(${ratio})`;
+
+            if (backToTop && backToTopRing) {
+                backToTop.classList.toggle("show", latestScrollY > 400);
+                backToTopRing.style.strokeDashoffset = String(ringCircumference * (1 - ratio));
+            }
 
             if (latestScrollY > lastScrollY && latestScrollY > 90) {
                 header.style.transform = "translateY(-100%)";
@@ -1523,6 +1631,12 @@
 
         window.addEventListener("scroll", onScroll, { passive: true });
         onScroll();
+
+        if (backToTop) {
+            backToTop.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
 
         const revealElements = document.querySelectorAll(".reveal");
         const revealObserver = new IntersectionObserver((entries) => {
@@ -1750,14 +1864,45 @@
                     const strength = (80 - dist) / 80;
                     const tx = dx * 0.2 * strength;
                     const ty = dy * 0.2 * strength;
+                    magneticCta.classList.add("is-magnetic-active");
                     magneticCta.style.transform = `translate(${tx}px, ${ty}px)`;
                 } else {
                     magneticCta.style.transform = "translate(0, 0)";
+                    magneticCta.classList.remove("is-magnetic-active");
                 }
             }, { passive: true });
 
             magneticCta.addEventListener("mouseleave", () => {
                 magneticCta.style.transform = "translate(0, 0)";
+                magneticCta.classList.remove("is-magnetic-active");
+            });
+        }
+
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        const nativeLazy = "loading" in HTMLImageElement.prototype;
+        if (!nativeLazy && lazyImages.length) {
+            const placeholder =
+                "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+
+            const lazyObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const img = entry.target;
+                    const dataSrc = img.getAttribute("data-src");
+                    if (dataSrc) {
+                        img.src = dataSrc;
+                        img.removeAttribute("data-src");
+                    }
+                    observer.unobserve(img);
+                });
+            }, { rootMargin: "200px 0px" });
+
+            lazyImages.forEach((img) => {
+                if (!img.dataset.src) {
+                    img.dataset.src = img.src;
+                    img.src = placeholder;
+                }
+                lazyObserver.observe(img);
             });
         }
 
