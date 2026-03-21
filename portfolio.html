@@ -3871,44 +3871,19 @@
             border: 1px solid rgba(0, 0, 0, 0.06);
         }
 
-        .timeslotter-logo-shell {
-            position: relative;
+        .timeslotter-css-logo {
             width: 60px;
             height: 60px;
-            flex: 0 0 60px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-timeslotter {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #fff;
-            padding: 4px;
-            box-shadow: 0 6px 16px rgba(2, 6, 23, 0.18);
-            border: 1px solid rgba(15, 23, 42, 0.08);
-        }
-
-        .timeslotter-logo-fallback {
-            display: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            background: #008080;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #008080, #005f5f);
             color: #fff;
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            box-shadow: 0 6px 16px rgba(2, 6, 23, 0.2);
-        }
-
-        .timeslotter-logo-fallback.is-visible {
             display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            box-shadow: 0 6px 16px rgba(2, 6, 23, 0.2);
         }
 
         .vit-logo-shell {
@@ -4042,14 +4017,15 @@
 
         .cert-issuer-logo.aws {
             width: 80px;
-            height: 48px;
+            height: 50px;
             background: #1a232f;
             border-color: rgba(245, 166, 35, 0.45);
+            filter: brightness(0) invert(1);
         }
 
         .cert-issuer-logo.oracle {
             width: 80px;
-            height: 32px;
+            height: 40px;
             border-color: rgba(255, 105, 105, 0.45);
         }
 
@@ -4063,8 +4039,8 @@
         }
 
         .cert-badge-image {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             object-fit: contain;
             border-radius: 50%;
             background: #fff;
@@ -4284,8 +4260,8 @@
         }
 
         .natwest-logo-img {
-            width: 120px;
-            height: 40px;
+            width: 130px;
+            height: 45px;
             object-fit: contain;
         }
 
@@ -4295,9 +4271,9 @@
 
         .natwest-logo-fallback {
             display: none;
-            width: 120px;
-            height: 40px;
-            border-radius: 6px;
+            width: 130px;
+            height: 45px;
+            border-radius: 8px;
             background: #42145f;
             color: #fff;
             font-size: 14px;
@@ -4305,6 +4281,22 @@
             align-items: center;
             justify-content: center;
             letter-spacing: 0.02em;
+        }
+
+        .img-brand-fallback {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #1f2937;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            padding: 0.28rem 0.55rem;
+            min-width: 36px;
+            min-height: 20px;
         }
 
         .natwest-logo-fallback.is-visible {
@@ -4799,6 +4791,7 @@
             width: 20px;
             height: 12px;
             object-fit: contain;
+            filter: brightness(0) invert(1);
             display: inline-block;
             vertical-align: -1px;
             margin-right: 0.34rem;
@@ -6304,7 +6297,7 @@
             <div>
                 <div class="hero-kicker" aria-label="Profile highlights">
                     <span class="hero-badge-chip">Pre-Final Year @ VIT Vellore</span>
-                    <span class="hero-badge-chip"><img class="aws-mini-badge" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" onerror="this.style.display='none'">AWS Certified</span>
+                    <span class="hero-badge-chip"><img class="aws-mini-badge" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" onerror="this.style.display='none'">AWS Certified</span>
                     <span class="hero-badge-chip">Open to Opportunities</span>
                 </div>
                 <h1 class="hero-name">Senthil Kumaran Balakrishnan</h1>
@@ -7197,9 +7190,9 @@
                             <img
                                 class="natwest-logo-img"
                                 loading="lazy"
-                                src="https://logo.clearbit.com/natwest.com"
+                                src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/natwest.svg"
                                 alt="NatWest Group logo"
-                                onerror="return window.__experienceLogoFallback && window.__experienceLogoFallback(this);"
+                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
                                 data-fallback-target="natwestLogoFallback">
                             <span id="natwestLogoFallback" class="natwest-logo-fallback" role="img" aria-label="NatWest fallback logo" aria-hidden="true">NatWest</span>
                         </div>
@@ -7295,10 +7288,7 @@
 
                 <article class="timeline-item card" data-stagger="3">
                     <div class="experience-head">
-                        <div class="timeslotter-logo-shell" aria-label="Time-Slotter logo">
-                            <img class="logo logo-timeslotter" loading="lazy" src="assets/img/timeslotter-logo.png" alt="Time-Slotter" onerror="return window.__experienceLogoFallback && window.__experienceLogoFallback(this);" data-fallback-target="timeslotterLogoFallback">
-                            <span id="timeslotterLogoFallback" class="timeslotter-logo-fallback" role="img" aria-label="Time-Slotter fallback logo" aria-hidden="true">TS</span>
-                        </div>
+                        <div class="timeslotter-css-logo" aria-label="Time-Slotter logo">TS</div>
                         <div>
                             <h3>Marketing Analyst</h3>
                             <p class="muted">Time-Slotter Technologies Pvt Ltd | Jan 2024 - Aug 2024</p>
@@ -7323,13 +7313,13 @@
                     <article class="cert-badge-card cert-medal-gold" data-cert-badge>
                         <div class="cert-badge-inner">
                             <div class="cert-brand-strip">
-                                <img class="cert-issuer-logo aws" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS logo" onerror="this.style.display='none'">
+                                <img class="cert-issuer-logo aws" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS logo" onerror="this.style.display='none'">
                             </div>
                             <div class="cert-badge-visual" aria-label="AWS Solutions Architect certification badge">
                                 <img class="cert-badge-image" loading="lazy" src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png" alt="AWS Certified Solutions Architect badge" onerror="this.style.display='none'">
                                 <span class="cert-verified-check" aria-label="Verified certification">&#10003;</span>
                             </div>
-                            <h3 class="cert-name"><img class="aws-mini-badge" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" onerror="this.style.display='none'">AWS Certified Solutions Architect - Associate (SAA-C03)</h3>
+                            <h3 class="cert-name"><img class="aws-mini-badge" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" onerror="this.style.display='none'">AWS Certified Solutions Architect - Associate (SAA-C03)</h3>
                             <p class="cert-issued">Issued Sep 2025</p>
                             <div class="cta-row">
                                 <button class="btn btn-ghost view-pdf-button" data-pdf-url="https://drive.google.com/file/d/1x0a-WmS2tjimR_3_3vq_u5buQ0ShO3TK/preview" data-title="AWS SAA-C03 Certificate">View Certificate</button>
@@ -7340,13 +7330,13 @@
                     <article class="cert-badge-card cert-medal-silver" data-cert-badge>
                         <div class="cert-badge-inner">
                             <div class="cert-brand-strip">
-                                <img class="cert-issuer-logo aws" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS logo" onerror="this.style.display='none'">
+                                <img class="cert-issuer-logo aws" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS logo" onerror="this.style.display='none'">
                             </div>
                             <div class="cert-badge-visual" aria-label="AWS Cloud Practitioner certification badge">
                                 <img class="cert-badge-image" loading="lazy" src="https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png" alt="AWS Certified Cloud Practitioner badge" onerror="this.style.display='none'">
                                 <span class="cert-verified-check" aria-label="Verified certification">&#10003;</span>
                             </div>
-                            <h3 class="cert-name"><img class="aws-mini-badge" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" onerror="this.style.display='none'">AWS Certified Cloud Practitioner</h3>
+                            <h3 class="cert-name"><img class="aws-mini-badge" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" onerror="this.style.display='none'">AWS Certified Cloud Practitioner</h3>
                             <p class="cert-issued">Issued Aug 2024</p>
                             <div class="cta-row">
                                 <button class="btn btn-ghost view-pdf-button" data-pdf-url="https://drive.google.com/file/d/1y67zALcu4lnZNV1BxdecwEmFAkKSfgK_/preview" data-title="AWS Cloud Practitioner Certificate">View Certificate</button>
@@ -7357,7 +7347,7 @@
                     <article class="cert-badge-card cert-medal-bronze" data-cert-badge>
                         <div class="cert-badge-inner">
                             <div class="cert-brand-strip">
-                                <img class="cert-issuer-logo oracle" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" alt="Oracle logo" onerror="this.style.display='none'">
+                                <img class="cert-issuer-logo oracle" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" alt="Oracle logo" onerror="this.style.display='none'">
                             </div>
                             <div class="cert-badge-visual" aria-label="Oracle OCI AI Foundations certification badge">
                                 <img class="cert-badge-image" loading="lazy" src="https://brm-workforce.oracle.com/pdf/certview/images/ORACLE_CERTIFICATION_BADGE_OCI2025AIFOUND.png" alt="Oracle OCI AI Foundations badge" onerror="this.style.display='none'">
@@ -7733,26 +7723,45 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        (function initExperienceLogoFallbacks() {
-            if (window.__experienceLogoFallbackReady) return;
-            window.__experienceLogoFallbackReady = true;
+        (function enforceImageFallbackPattern() {
+            function initialsFromAlt(altText) {
+                const alt = (altText || "IMG").trim();
+                const words = alt.split(/\s+/).filter(Boolean);
+                if (!words.length) return "IMG";
+                if (words.length === 1) return words[0].slice(0, 3).toUpperCase();
+                return words.slice(0, 3).map((word) => word.charAt(0)).join("").toUpperCase();
+            }
 
-            window.__experienceLogoFallback = function __experienceLogoFallback(img) {
-                if (!img || img.dataset.fallbackApplied === "1") return true;
-                img.dataset.fallbackApplied = "1";
-                img.style.display = "none";
+            function fallbackColorForImage(img) {
+                const src = (img.getAttribute("src") || "").toLowerCase();
+                const alt = (img.getAttribute("alt") || "").toLowerCase();
+                if (src.includes("natwest") || alt.includes("natwest")) return "#42145F";
+                if (alt.includes("time-slotter") || alt.includes("timeslotter")) return "#008080";
+                if (alt.includes("aws")) return "#111827";
+                if (alt.includes("vit")) return "#42145F";
+                return "#1F2937";
+            }
 
-                const targetId = img.getAttribute("data-fallback-target");
-                if (!targetId) return true;
+            window.addEventListener("DOMContentLoaded", function applyFallbackPattern() {
+                document.querySelectorAll("img").forEach((img) => {
+                    let fallback = img.nextElementSibling;
+                    if (!fallback || !fallback.classList.contains("img-brand-fallback")) {
+                        fallback = document.createElement("div");
+                        fallback.className = "img-brand-fallback";
+                        img.insertAdjacentElement("afterend", fallback);
+                    }
 
-                const fallback = document.getElementById(targetId);
-                if (fallback) {
-                    fallback.classList.add("is-visible");
-                    fallback.setAttribute("aria-hidden", "false");
-                }
+                    const desiredText = (img.dataset.brandInitials || initialsFromAlt(img.alt));
+                    fallback.textContent = desiredText;
+                    fallback.style.background = fallbackColorForImage(img);
 
-                return true;
-            };
+                    const computed = window.getComputedStyle(img);
+                    fallback.style.width = computed.width;
+                    fallback.style.height = computed.height;
+
+                    img.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='flex'");
+                });
+            });
         })();
     </script>
     <script>
@@ -7982,6 +7991,9 @@
                 startHiddenTabFlash();
             }
         })();
+    </script>
+    <script>
+        window.addEventListener('load',()=>{document.querySelectorAll('img').forEach(img=>{if(!img.naturalWidth)console.warn('BROKEN IMG:',img.src)})})
     </script>
     <script defer src="app.js"></script>
 </body>
