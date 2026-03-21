@@ -404,27 +404,130 @@
             background: rgba(245, 166, 35, 0.08);
         }
 
-        .skills-wrap {
+        .skills-columns {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 0.9rem;
+            grid-template-columns: repeat(4, minmax(240px, 1fr));
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.2rem;
         }
 
-        .skill {
+        .skill-category {
+            --cat: var(--accent);
             border: 1px solid var(--line);
-            border-radius: 12px;
-            min-height: 54px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muted);
-            font-weight: 500;
-            transition: border-color 0.2s ease, color 0.2s ease;
+            border-top: 3px solid var(--cat);
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01));
+            padding: 1rem;
+            min-height: 100%;
         }
 
-        .skill:hover {
-            border-color: rgba(245, 166, 35, 0.6);
-            color: var(--text);
+        .skill-category h3 {
+            font-family: "Clash Display", sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--cat);
+        }
+
+        .skill-list {
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .skill-terminal {
+            position: relative;
+            border: 1px solid rgba(76, 255, 123, 0.25);
+            border-radius: 10px;
+            background: #0a1110;
+            color: #4cff7b;
+            font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+            padding: 0.62rem 0.7rem;
+            overflow: hidden;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .skill-terminal:hover {
+            transform: translateY(-2px);
+            border-color: rgba(76, 255, 123, 0.5);
+        }
+
+        .skill-terminal::before {
+            content: ">";
+            margin-right: 0.5rem;
+            color: #76ff98;
+            font-weight: 700;
+        }
+
+        .skill-terminal::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -16%;
+            height: 28%;
+            background: linear-gradient(180deg, rgba(76, 255, 123, 0), rgba(76, 255, 123, 0.35), rgba(76, 255, 123, 0));
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .skill-terminal:hover::after {
+            opacity: 1;
+            animation: scan-line 0.7s linear;
+        }
+
+        @keyframes scan-line {
+            from { transform: translateY(-135%); }
+            to { transform: translateY(460%); }
+        }
+
+        .proficiency {
+            margin-top: 0.65rem;
+        }
+
+        .proficiency-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .bar {
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(237, 242, 255, 0.08);
+            overflow: hidden;
+            border: 1px solid rgba(237, 242, 255, 0.12);
+        }
+
+        .bar-fill {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--cat), color-mix(in oklab, var(--cat), #ffffff 22%));
+            animation: fill-bar 1.2s ease forwards;
+        }
+
+        .bar-fill[data-level="96"] { --target: 96%; }
+        .bar-fill[data-level="92"] { --target: 92%; }
+        .bar-fill[data-level="89"] { --target: 89%; }
+        .bar-fill[data-level="84"] { --target: 84%; }
+
+        @keyframes fill-bar {
+            from { width: 0; }
+            to { width: var(--target, 88%); }
+        }
+
+        @supports (animation-timeline: view()) {
+            .bar-fill {
+                animation-name: fill-bar;
+                animation-duration: 1ms;
+                animation-timing-function: linear;
+                animation-fill-mode: both;
+                animation-timeline: view();
+                animation-range: entry 20% cover 35%;
+            }
         }
 
         .timeline {
@@ -631,8 +734,8 @@
                 max-width: 12ch;
             }
 
-            .skills-wrap {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
+            .skills-columns {
+                grid-template-columns: repeat(2, minmax(250px, 1fr));
             }
 
             .grid-2 {
@@ -662,8 +765,8 @@
                 right: -0.02em;
             }
 
-            .skills-wrap {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+            .skills-columns {
+                grid-template-columns: 1fr;
             }
 
             .hex-frame {
@@ -807,19 +910,58 @@
                 <p class="eyebrow">Skills</p>
                 <h2 class="title">Technical Skills</h2>
             </header>
-            <div class="skills-wrap">
-                <div class="skill">C</div>
-                <div class="skill">C++</div>
-                <div class="skill">Python</div>
-                <div class="skill">HTML5</div>
-                <div class="skill">CSS3</div>
-                <div class="skill">JavaScript</div>
-                <div class="skill">Java</div>
-                <div class="skill">Terraform</div>
-                <div class="skill">AWS</div>
-                <div class="skill">Angular</div>
-                <div class="skill">React</div>
-                <div class="skill">SQL</div>
+            <div class="skills-columns" data-stagger="1">
+                <article class="skill-category" style="--cat:#F5A623;">
+                    <h3>Languages</h3>
+                    <div class="skill-list">
+                        <div class="skill-terminal">C</div>
+                        <div class="skill-terminal">C++</div>
+                        <div class="skill-terminal">Python</div>
+                        <div class="skill-terminal">Java</div>
+                        <div class="skill-terminal">JavaScript</div>
+                    </div>
+                    <div class="proficiency">
+                        <div class="proficiency-head"><span>Proficiency</span><span>96%</span></div>
+                        <div class="bar"><div class="bar-fill" data-level="96"></div></div>
+                    </div>
+                </article>
+
+                <article class="skill-category" style="--cat:#4DB4FF;">
+                    <h3>Frontend</h3>
+                    <div class="skill-list">
+                        <div class="skill-terminal">HTML5</div>
+                        <div class="skill-terminal">CSS3</div>
+                        <div class="skill-terminal">React</div>
+                        <div class="skill-terminal">Angular</div>
+                    </div>
+                    <div class="proficiency">
+                        <div class="proficiency-head"><span>Proficiency</span><span>92%</span></div>
+                        <div class="bar"><div class="bar-fill" data-level="92"></div></div>
+                    </div>
+                </article>
+
+                <article class="skill-category" style="--cat:#8B7CFF;">
+                    <h3>Cloud &amp; DevOps</h3>
+                    <div class="skill-list">
+                        <div class="skill-terminal">AWS</div>
+                        <div class="skill-terminal">Terraform</div>
+                    </div>
+                    <div class="proficiency">
+                        <div class="proficiency-head"><span>Proficiency</span><span>89%</span></div>
+                        <div class="bar"><div class="bar-fill" data-level="89"></div></div>
+                    </div>
+                </article>
+
+                <article class="skill-category" style="--cat:#44D79F;">
+                    <h3>Database</h3>
+                    <div class="skill-list">
+                        <div class="skill-terminal">SQL</div>
+                    </div>
+                    <div class="proficiency">
+                        <div class="proficiency-head"><span>Proficiency</span><span>84%</span></div>
+                        <div class="bar"><div class="bar-fill" data-level="84"></div></div>
+                    </div>
+                </article>
             </div>
         </section>
 
