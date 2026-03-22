@@ -137,6 +137,7 @@
         const confettiParticles = [];
         const confettiColors = ["#F5A623", "#EDF2FF", "#C1440E", "#00FF41", "#90D6FF", "#BFB3FF"];
         let confettiLastTime = performance.now();
+        let spotifyProxyUnavailable = false;
 
         const GITHUB_USER = "senthil-3698";
         const GITHUB_CACHE_KEY = "skbGithubLiveCacheV1";
@@ -393,11 +394,20 @@
         }
 
         async function refreshSpotifyWidget() {
+            if (spotifyProxyUnavailable) {
+                setSpotifyWidgetState(SPOTIFY_FALLBACK_TRACK);
+                return;
+            }
+
             try {
                 const track = await fetchSpotifyTrack();
                 setSpotifyWidgetState(track);
             } catch (error) {
-                console.warn("Spotify widget fallback active:", error?.message || error);
+                const message = String(error?.message || error || "");
+                if (message.includes("(404)")) {
+                    spotifyProxyUnavailable = true;
+                }
+                console.warn("Spotify widget fallback active:", message || "Unavailable");
                 setSpotifyWidgetState(SPOTIFY_FALLBACK_TRACK);
             }
         }
@@ -1224,8 +1234,42 @@
         }
 
         async function fetchFallbackArticles() {
-            const items = await Promise.all(BLOG_FALLBACK_URLS.slice(0, 3).map((url) => fetchOgMetadataForUrl(url)));
-            return items;
+            const staticFallbackItems = BLOG_FALLBACK_URLS.slice(0, 3).map((url, index) => {
+                const host = (() => {
+                    try {
+                        return new URL(url).hostname.replace(/^www\./, "");
+                    } catch (error) {
+                        void error;
+                        return "external";
+                    }
+                })();
+
+                const titles = [
+                    "Announcing Cloudflare D1",
+                    "Introducing Next.js 14",
+                    "Strong Customer Authentication"
+                ];
+
+                return {
+                    title: titles[index] || `Article from ${host}`,
+                    url,
+                    image: "https://placehold.co/1200x700/0f172a/edf2ff?text=Curated+Article",
+                    excerpt: `Curated engineering read from ${host}.`,
+                    dateLabel: "Curated pick",
+                    readingTimeLabel: "3 min read",
+                    reactionLabel: "External",
+                    tags: ["article", "curated"]
+                };
+            });
+
+            const settled = await Promise.allSettled(
+                BLOG_FALLBACK_URLS.slice(0, 3).map((url) => fetchOgMetadataForUrl(url))
+            );
+
+            return settled.map((result, index) => {
+                if (result.status === "fulfilled") return result.value;
+                return staticFallbackItems[index];
+            });
         }
 
         function setBlogSkeletonVisible(visible) {
@@ -2174,7 +2218,8 @@
         window.addEventListener("resize", resizeConfettiCanvas);
 
         document.addEventListener("keydown", (event) => {
-            const key = event.key.toLowerCase();
+            const key = String(event?.key || "").toLowerCase();
+            if (!key) return;
 
             const expected = konamiSequence[konamiIndex];
             if (key === expected) {
@@ -3030,29 +3075,25 @@
         (async () => {
             try {
                 soundEnabled = localStorage.getItem("skbSoundEnabled") !== "0";
-                audioUnlocked = localStorage.getItem("skbAudioUnlocked") === "1";
+                audioUnlocked = false;
             } catch (error) {
                 void error;
             }
 
             updateSoundToggle();
 
-            if (audioUnlocked) {
-                await unlockAudio();
-            } else {
-                soundUnlockHint?.classList.remove("hidden");
+            soundUnlockHint?.classList.remove("hidden");
 
-                const unlockOnce = async () => {
-                    const unlocked = await unlockAudio();
-                    if (unlocked) {
-                        document.removeEventListener("pointerdown", unlockOnce, true);
-                        document.removeEventListener("keydown", unlockOnce, true);
-                    }
-                };
+            const unlockOnce = async () => {
+                const unlocked = await unlockAudio();
+                if (unlocked) {
+                    document.removeEventListener("pointerdown", unlockOnce, true);
+                    document.removeEventListener("keydown", unlockOnce, true);
+                }
+            };
 
-                document.addEventListener("pointerdown", unlockOnce, true);
-                document.addEventListener("keydown", unlockOnce, true);
-            }
+            document.addEventListener("pointerdown", unlockOnce, true);
+            document.addEventListener("keydown", unlockOnce, true);
         })();
 
         if (soundToggle) {

@@ -8428,7 +8428,11 @@
         })();
     </script>
     <script>
-        window.addEventListener('load',()=>{document.querySelectorAll('img').forEach(img=>{if(!img.naturalWidth)console.warn('BROKEN IMG:',img.src)})})
+        window.addEventListener('load',()=>{
+            const isLocal = ['localhost','127.0.0.1'].includes(window.location.hostname);
+            if (!isLocal) return;
+            document.querySelectorAll('img').forEach(img=>{if(!img.naturalWidth)console.warn('BROKEN IMG:',img.src)})
+        })
     </script>
     <script defer src="app.js"></script>
 </body>
