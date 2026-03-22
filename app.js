@@ -342,6 +342,38 @@
             });
         }
 
+        function initSkillsMasonryFallback() {
+            const skillsGrid = document.querySelector(".skills-columns.skills-accordion");
+            if (!skillsGrid) return;
+
+            const supportsMasonry = typeof CSS !== "undefined" && CSS.supports("grid-template-rows", "masonry");
+            if (supportsMasonry) {
+                skillsGrid.classList.remove("masonry-fallback");
+                return;
+            }
+
+            const applyMasonrySpans = () => {
+                skillsGrid.classList.add("masonry-fallback");
+                const rowGap = Number.parseFloat(getComputedStyle(skillsGrid).rowGap || "0") || 0;
+                const baseRow = 10;
+
+                Array.from(skillsGrid.children).forEach((card) => {
+                    const height = card.getBoundingClientRect().height;
+                    const span = Math.max(1, Math.ceil((height + rowGap) / (baseRow + rowGap)));
+                    card.style.setProperty("--masonry-span", String(span));
+                });
+            };
+
+            requestAnimationFrame(applyMasonrySpans);
+            window.addEventListener("resize", applyMasonrySpans, { passive: true });
+
+            skillsGrid.querySelectorAll("details.skill-category").forEach((panel) => {
+                panel.addEventListener("toggle", () => {
+                    requestAnimationFrame(applyMasonrySpans);
+                });
+            });
+        }
+
         function applySpotifyMarqueeIfNeeded() {
             if (!spotifyTrackName) return;
             spotifyTrackName.classList.remove("marquee-scroll");
@@ -2254,6 +2286,7 @@
         initLogoFallbacks();
         initSpotifyWidget();
         initCompetitiveStats();
+        initSkillsMasonryFallback();
         initCustomInstallPrompt();
         initChatAssistant();
 
@@ -2504,6 +2537,19 @@
             });
         }, { threshold: 0.2 });
         revealElements.forEach((el) => revealObserver.observe(el));
+
+        const eyebrowLabels = document.querySelectorAll(".eyebrow");
+        if (eyebrowLabels.length) {
+            const eyebrowObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add("in-view");
+                    observer.unobserve(entry.target);
+                });
+            }, { threshold: 0.3 });
+
+            eyebrowLabels.forEach((eyebrow) => eyebrowObserver.observe(eyebrow));
+        }
 
         const contactSocialRow = document.getElementById("contactSocialRow");
         if (contactSocialRow) {
