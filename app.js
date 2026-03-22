@@ -141,9 +141,9 @@
         const GITHUB_USER = "senthil-3698";
         const GITHUB_CACHE_KEY = "skbGithubLiveCacheV1";
         const GITHUB_CACHE_TTL = 10 * 60 * 1000;
-        const EMAILJS_SERVICE_ID = "YOUR_EMAILJS_SERVICE_ID";
-        const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
-        const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
+        const EMAILJS_SERVICE_ID = "service_9ek5ic9";
+        const EMAILJS_TEMPLATE_ID = "template_hwklar4";
+        const EMAILJS_PUBLIC_KEY = "HN4xJL1XTRK0rvix-";
         const STATS_PASSWORD_HASH = "badf82b72c8b86691e9b946ea1c922b225197336d672c727979e209f034fa6a3";
         const ANALYTICS_VISITS_KEY = "skbAnalyticsVisitsV1";
         const ANALYTICS_TOTAL_KEY = "skbAnalyticsTotalVisitsV1";
