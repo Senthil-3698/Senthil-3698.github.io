@@ -2087,6 +2087,16 @@
             if (!heroName || heroName.dataset.eggLettersBuilt === "true") return;
 
             const fragment = document.createDocumentFragment();
+            // Letters are grouped into a per-word wrapper so the browser can only
+            // break lines between words (at the space), never mid-word between
+            // individual letter spans.
+            let wordSpan = null;
+
+            const startWord = () => {
+                wordSpan = document.createElement("span");
+                wordSpan.className = "name-word";
+                fragment.appendChild(wordSpan);
+            };
 
             const wrapNode = (node, isAccent = false) => {
                 if (node.nodeType === Node.TEXT_NODE) {
@@ -2095,7 +2105,13 @@
                         const span = document.createElement("span");
                         span.className = `name-letter${char === " " ? " space" : ""}${isAccent ? " accent" : ""}`;
                         span.textContent = char === " " ? "\u00A0" : char;
-                        fragment.appendChild(span);
+                        if (char === " ") {
+                            fragment.appendChild(span);
+                            wordSpan = null;
+                        } else {
+                            if (!wordSpan) startWord();
+                            wordSpan.appendChild(span);
+                        }
                     });
                     return;
                 }
@@ -2533,7 +2549,14 @@
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0, rootMargin: "0px 0px -10% 0px" });
+        // Note: a 0.2 area threshold previously meant a section needed 20% of its
+        // OWN height visible at once to reveal. Long sections (e.g. Projects,
+        // once its cards stack full-width on mobile) are taller than the entire
+        // mobile viewport, so that 20% could never be satisfied and the section
+        // stayed permanently invisible (opacity: 0) for mobile visitors. A 0
+        // threshold reveals as soon as any part of the section enters view,
+        // which works regardless of section height or viewport size.
         revealElements.forEach((el) => revealObserver.observe(el));
 
         const eyebrowLabels = document.querySelectorAll(".eyebrow");

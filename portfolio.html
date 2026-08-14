@@ -451,6 +451,11 @@
             user-select: none;
         }
 
+        .name-word {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
         .name-letter {
             display: inline-block;
             transform: translate(0, 0) rotate(0) scale(1);
@@ -1207,7 +1212,43 @@
         .hero-copy {
             color: var(--muted);
             max-width: 56ch;
-            margin-bottom: 2rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .hero-focus-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            list-style: none;
+            gap: 0.6rem 0.9rem;
+            margin-bottom: 2.1rem;
+            padding: 0;
+        }
+
+        .hero-focus-row li {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            opacity: 0.86;
+        }
+
+        .hero-focus-row li::before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .hero-focus-row li + li {
+            padding-left: 0.9rem;
+            border-left: 1px solid var(--line);
         }
 
         .hero-word {
@@ -1223,9 +1264,11 @@
             transition-delay: calc(var(--wdelay) * 1ms);
         }
 
-        .hero-stat-pills {
+        .hero > div.hero-stat-pills {
             position: absolute;
             inset: 0;
+            grid-column: 1 / -1;
+            grid-row: 1;
             pointer-events: none;
             z-index: 1;
         }
@@ -2509,10 +2552,10 @@
 
         .security-guardian-card {
             background:
-                radial-gradient(circle at 15% 0%, rgba(66, 212, 255, 0.14), transparent 42%),
-                radial-gradient(circle at 90% 100%, rgba(60, 255, 170, 0.08), transparent 45%),
+                radial-gradient(circle at 15% 0%, rgba(94, 180, 200, 0.14), transparent 42%),
+                radial-gradient(circle at 90% 100%, rgba(95, 184, 150, 0.08), transparent 45%),
                 linear-gradient(180deg, rgba(10, 20, 34, 0.95), rgba(8, 15, 27, 0.96));
-            border-color: rgba(66, 212, 255, 0.36);
+            border-color: rgba(94, 180, 200, 0.36);
             isolation: isolate;
         }
 
@@ -2548,9 +2591,9 @@
         }
 
         .security-flag {
-            border: 1px solid rgba(66, 212, 255, 0.65);
+            border: 1px solid rgba(94, 180, 200, 0.65);
             border-radius: 999px;
-            background: rgba(66, 212, 255, 0.14);
+            background: rgba(94, 180, 200, 0.14);
             color: rgba(211, 247, 255, 0.96);
             font-size: 0.68rem;
             letter-spacing: 0.09em;
@@ -2578,12 +2621,12 @@
         }
 
         .security-terminal-panel {
-            border: 1px solid rgba(66, 212, 255, 0.28);
+            border: 1px solid rgba(94, 180, 200, 0.28);
             border-radius: 12px;
             background: rgba(2, 10, 18, 0.88);
             overflow: hidden;
             min-height: 240px;
-            box-shadow: inset 0 0 0 1px rgba(66, 212, 255, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(94, 180, 200, 0.08);
         }
 
         .security-terminal-head {
@@ -2592,7 +2635,7 @@
             justify-content: space-between;
             gap: 0.6rem;
             padding: 0.48rem 0.66rem;
-            border-bottom: 1px solid rgba(66, 212, 255, 0.24);
+            border-bottom: 1px solid rgba(94, 180, 200, 0.24);
             background: rgba(22, 37, 56, 0.7);
         }
 
@@ -2631,7 +2674,7 @@
         .security-terminal-line.status { color: #afffca; }
 
         .security-arch-panel {
-            border: 1px solid rgba(66, 212, 255, 0.26);
+            border: 1px solid rgba(94, 180, 200, 0.26);
             border-radius: 12px;
             background: rgba(4, 13, 24, 0.82);
             padding: 0.62rem;
@@ -2650,14 +2693,14 @@
         .security-arch-svg {
             width: 100%;
             height: auto;
-            border: 1px solid rgba(66, 212, 255, 0.2);
+            border: 1px solid rgba(94, 180, 200, 0.2);
             border-radius: 10px;
-            background: radial-gradient(circle at 48% 8%, rgba(66, 212, 255, 0.14), transparent 45%), #061324;
+            background: radial-gradient(circle at 48% 8%, rgba(94, 180, 200, 0.14), transparent 45%), #061324;
         }
 
         .security-node {
             fill: #10233c;
-            stroke: rgba(66, 212, 255, 0.48);
+            stroke: rgba(94, 180, 200, 0.48);
             stroke-width: 1.4;
         }
 
@@ -2675,7 +2718,7 @@
 
         .security-link {
             fill: none;
-            stroke: rgba(66, 212, 255, 0.6);
+            stroke: rgba(94, 180, 200, 0.6);
             stroke-width: 1.35;
             marker-end: url(#securityArrow);
             stroke-dasharray: 4 4;
@@ -2695,7 +2738,7 @@
         }
 
         .security-metric {
-            border: 1px solid rgba(66, 212, 255, 0.22);
+            border: 1px solid rgba(94, 180, 200, 0.22);
             border-radius: 10px;
             background: rgba(5, 14, 26, 0.82);
             padding: 0.46rem;
@@ -3563,18 +3606,11 @@
         }
 
         .theme-languages {
-            --cat: #4cff7b;
-        }
-
-        .theme-languages .skill-terminal {
-            background: #08110c;
-            border-color: rgba(76, 255, 123, 0.35);
-            color: #a9ffbf;
-            font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+            --cat: #c9a15a;
         }
 
         .theme-frameworks {
-            --cat: #4db4ff;
+            --cat: #6fa3d8;
         }
 
         .theme-cloud {
@@ -3582,11 +3618,11 @@
         }
 
         .theme-data {
-            --cat: #35d9e8;
+            --cat: #5fb8ac;
         }
 
         .theme-ai {
-            --cat: #9a6bff;
+            --cat: #9689c4;
         }
 
         .theme-tools {
@@ -6293,23 +6329,23 @@
         }
 
         .stat-pill-float {
-            max-width: 220px;
+            max-width: 200px;
             text-align: center;
         }
 
         .stat-pill-float:nth-child(1) {
-            top: 7%;
-            left: 4%;
+            top: 4%;
+            left: 58%;
         }
 
         .stat-pill-float:nth-child(2) {
-            top: 78%;
-            left: 4%;
+            top: 48%;
+            left: 87%;
         }
 
         .stat-pill-float:nth-child(3) {
-            top: 10%;
-            left: 62%;
+            top: 85%;
+            left: 56%;
         }
 
         .about-story-panel p,
@@ -6720,11 +6756,13 @@
 
         #home.hero .hero-copy-column {
             grid-column: 1 / 8;
+            grid-row: 1;
             z-index: 2;
         }
 
         #home.hero .hero-media {
             grid-column: 7 / 13;
+            grid-row: 1;
             z-index: 1;
         }
 
@@ -6852,25 +6890,17 @@
             margin-top: calc(var(--i, 0) * 20px);
         }
 
-        @supports (grid-template-rows: subgrid) {
-            #projectsBento {
-                grid-template-rows: repeat(6, minmax(70px, auto));
-            }
-
-            #projectsBento > .project-card {
-                display: grid;
-                grid-template-rows: subgrid;
-                grid-row: span 2;
-                align-content: start;
-            }
-
-            #projectsBento > .project-card .inner-content,
-            #projectsBento > .project-card .security-card-inner {
-                display: grid;
-                grid-template-rows: subgrid;
-                grid-row: span 2;
-            }
-        }
+        /* Note: a subgrid-based row-alignment enhancement previously lived here.
+           It assumed every project card wrapped its content in a single
+           .inner-content/.security-card-inner element, but several cards
+           (e.g. the Risk Sentinel card) render multiple top-level content
+           blocks directly inside .project-card. Because the enhancement only
+           reserved 2 subgrid row-tracks per card, any card with more than 2
+           direct children had its extra content collapse into the same row,
+           causing severe visual overlap in every browser that supports
+           subgrid (effectively all current browsers). Removed in favor of the
+           base flex column layout on .project-card, which stacks content
+           correctly for every card without requiring a uniform DOM shape. */
 
         .scroll-progress {
             top: 0;
@@ -6896,6 +6926,7 @@
             #home.hero .hero-copy-column,
             #home.hero .hero-media {
                 grid-column: 1 / -1;
+                grid-row: auto;
             }
 
             .desktop-nav {
@@ -6972,6 +7003,7 @@
             #home.hero .hero-copy-column,
             #home.hero .hero-media {
                 grid-column: 1 / -1;
+                grid-row: auto;
             }
 
             .hero > div:first-child {
@@ -7290,7 +7322,13 @@
                 </div>
                 <h1 class="hero-name">Senthil Kumaran Balakrishnan</h1>
                 <p class="hero-sub" id="typingText"><span class="hero-role-wrap"><span class="hero-role-text">Software Engineer</span></span></p>
-                <p class="hero-copy">Building enterprise-grade systems at the intersection of Cloud, AI, and Finance — from AWS infrastructure at NatWest Group to production-style fintech and security platforms.</p>
+                <p class="hero-copy">Computer Science graduate (VIT Vellore) with Software Engineering experience across Cloud infrastructure, AI/ML, and security automation — building toward a Finance &amp; FinTech specialization, from AWS banking infrastructure at NatWest Group to a full-stack trade risk platform.</p>
+                <ul class="hero-focus-row" aria-label="Areas of focus">
+                    <li>Cloud &amp; DevOps</li>
+                    <li>Fintech &amp; Full-Stack</li>
+                    <li>AI/ML</li>
+                    <li>Cybersecurity</li>
+                </ul>
                 <div class="cta-row">
                     <a class="btn btn-primary magnetic-btn" id="magneticCta" href="#projects">View My Work -></a>
                     <button class="btn btn-ghost view-pdf-button" id="heroResumeBtn" data-pdf-url="https://drive.google.com/file/d/1rpuzHf-1S8SA1CsfUAdnDuw4gRQlthhT/preview" data-title="Senthil Kumaran Balakrishnan — Resume" type="button">Download Resume</button>
@@ -7341,11 +7379,12 @@
                     <article class="about-story-panel">
                         <h3>The Story</h3>
                         <p>I'm a Computer Science engineer (B.Tech, VIT Vellore, 2022–2026) who bridges academic depth with production engineering — proven through a Software Engineer internship at NatWest Group, where I shipped enterprise cloud infrastructure into a live banking environment.</p>
-                        <p>My work is centered on three pillars with concrete outcomes: <strong>Cloud/DevOps</strong> through enterprise Terraform + AWS infrastructure across two NatWest environments, <strong>Full-Stack Development</strong> through end-to-end product builds like Risk Sentinel with React 19 and Spring Boot 3.2, and <strong>AI/ML</strong> through a 7-algorithm benchmarking pipeline that reached 99.74% accuracy on clinical data.</p>
+                        <p>My work sits at the intersection of <strong>Cloud/DevOps</strong>, <strong>AI/ML</strong>, and <strong>Cybersecurity</strong> — increasingly applied to <strong>Finance &amp; FinTech</strong> systems, from AWS banking infrastructure at NatWest to a full-stack trade risk platform I built end-to-end.</p>
                         <ul class="about-pillar-list" aria-label="Specialization pillars">
                             <li><strong>Cloud/DevOps:</strong> Terraform IaC for VPC endpoints across 2 enterprise AWS environments at NatWest, a 3-node Kubernetes cluster, and CloudWatch/X-Ray observability — delivered in a 31-day cycle validated by an AWS expert.</li>
-                            <li><strong>Full-Stack Development:</strong> Risk Sentinel, a fintech risk platform with a 6-phase risk algorithm and 15+ REST endpoints across React, Spring Boot, and PostgreSQL.</li>
-                            <li><strong>AI/ML:</strong> Multi-agent security remediation (Python + Claude AI) and a 7-model benchmarking pipeline delivering 99.74% peak accuracy in healthcare risk prediction.</li>
+                            <li><strong>Fintech &amp; Full-Stack:</strong> Risk Sentinel, a trade risk intelligence platform with a 6-phase risk algorithm and 15+ REST endpoints across React 19, Spring Boot 3.2, and PostgreSQL.</li>
+                            <li><strong>AI/ML:</strong> A 7-algorithm benchmarking pipeline (incl. CatBoost, XGBoost, Random Forest) reaching 99.74% accuracy on clinical prediction data.</li>
+                            <li><strong>Cybersecurity:</strong> A multi-agent AI system (Python + Claude) that detects and remediates cloud vulnerabilities in under 5 seconds at 90% accuracy.</li>
                         </ul>
                     </article>
 
@@ -7627,7 +7666,7 @@
                                 <svg class="security-arch-svg" viewBox="0 0 360 195" role="img" aria-label="Python and Claude AI Agent to FastAPI to React dashboard with WebSockets and Terraform infrastructure">
                                     <defs>
                                         <marker id="securityArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                                            <path d="M0,0 L8,4 L0,8 z" fill="rgba(66, 212, 255, 0.85)"></path>
+                                            <path d="M0,0 L8,4 L0,8 z" fill="rgba(94, 180, 200, 0.85)"></path>
                                         </marker>
                                     </defs>
 
