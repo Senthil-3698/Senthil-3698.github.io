@@ -4408,8 +4408,14 @@
 
         .natwest-achievements {
             display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 0.55rem;
+            grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+            gap: 0.6rem;
+            align-items: stretch;
+        }
+
+        .natwest-achievement {
+            display: flex;
+            flex-direction: column;
         }
 
         .natwest-achievement {
@@ -7589,7 +7595,7 @@
                     <span class="case-study-link" aria-label="Academic project, no public repository">Academic Project</span>
                 </article>
 
-                <article id="securityRemediationCard" class="project-card project-main security-guardian-card" data-category="web" data-tilt>
+                <article id="securityRemediationCard" class="project-card project-hero security-guardian-card" data-category="web" data-tilt>
                     <canvas id="securityGridCanvas" class="security-grid-canvas" width="900" height="520" aria-hidden="true"></canvas>
 
                     <div class="security-card-inner">
