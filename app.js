@@ -2279,13 +2279,11 @@
         });
 
         initGithubLiveActivity();
-        initBlogFeed();
         initAnalyticsSession();
         initStatsRouteHandlers();
         initAvailabilityWidget();
         initLogoFallbacks();
         initSpotifyWidget();
-        initCompetitiveStats();
         initSkillsMasonryFallback();
         initCustomInstallPrompt();
         initChatAssistant();
@@ -2829,10 +2827,10 @@
         const typingText = document.getElementById("typingText");
         const heroRoleTextNode = typingText?.querySelector(".hero-role-text");
         const typingPhrases = [
-            "Full-Stack Engineer",
+            "Software Engineer",
             "Cloud & DevOps Engineer",
-            "AI/ML Engineer",
-            "Fintech Developer"
+            "Full-Stack Engineer",
+            "AI/ML Engineer"
         ];
         let phraseIndex = 0;
         let roleIntervalId = null;
